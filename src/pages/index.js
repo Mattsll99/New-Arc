@@ -1,9 +1,15 @@
 import Head from "next/head";
 import styled from "styled-components";
-import BigBox from "../../components/BigBox";
-import LeftMenu from "../../components/LeftMenu";
+import Logo from "../../components/Logo";
+import EditorApp from "../../components/EditorApp";
+import { useState } from "react";
+
+
+
 
 export default function Home() {
+  const [srcDoc, setSrcDoc] = useState("");
+
   return (
     <>
       <Head>
@@ -14,7 +20,25 @@ export default function Home() {
       </Head>
       <main>
         <Container>
-          <LeftMenu />
+          <LeftMenu>
+            <Logo />
+            <Wrapper>
+              <Input />
+            </Wrapper>
+          </LeftMenu>
+          <RightMenu>
+            <EditorApp />
+            <Cadre>
+            <iframe
+          srcDoc={srcDoc}
+          title="output"
+          sandbox="allow-scripts"
+          frameBorder="0"
+          height="100%"
+          width="100%"
+        />
+            </Cadre>
+          </RightMenu>
         </Container>
       </main>
     </>
@@ -22,8 +46,60 @@ export default function Home() {
 }
 
 const Container = styled.div`
-  width: 100vw;
-  height: auto;
-  display: flex;
+  width: 100vw; 
+  height: 100vh;
+  display: flex; 
   flex-direction: row;
+`;
+
+const Cadre = styled.div`
+  height: 50%; 
+  width: 100%; 
+  background: transparent; 
+  border-top: solid 4px #131313;
+  border-left: solid 4px #131313;
+  border-right: solid 4px #131313;
+  background: #FFFFFF;
+`;
+
+const LeftMenu = styled.div`
+  height: 100%; 
+  width: 350px;
+  background: #3C3C3C;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex; 
+  flex-direction: column;
+`;
+
+const RightMenu = styled.div`
+  height: 100%; 
+  width: 76%;
+  background: transparent;
+  display: flex; 
+  flex-direction: column;
+`;
+
+const Wrapper = styled.div`
+  margin-top: 100px;
+  width: 100%;
+  min-height: 50px;
+  display: flex; 
+  align-items: start; 
+  justify-content: start;
+  border: none; 
+  decoration: none;
+  background: #6F6F6F; 
+  text-decoration: none;
+  padding: 10px;
+  font-size: 15px;
+`;
+
+const Input = styled.textarea`
+  background: transparent; 
+  decoration: none;
+  border: none;
+  width: 100%;
+  height: auto;
 `;

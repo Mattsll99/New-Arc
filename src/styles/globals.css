@@ -103,3 +103,14 @@ a {
     color-scheme: dark;
   }
 }
+
+.box-size{
+  height: 10vw
+}
+
+.code-mirror-wrapper {
+  flex-grow: 1;
+  border-bottom-right-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+  overflow: hidden;
+}
