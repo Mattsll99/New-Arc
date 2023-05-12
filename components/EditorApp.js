@@ -13,13 +13,24 @@ const EditorApp = () => {
 
   const [widen, setWiden] = useState(false)
 
-  const [selectedElement, setSelectedElement] = useState("")
-
-  const iframeRef = useRef(null);
-
   const widenPage = () => {
     setWiden(!widen)
   }
+
+  // Add a ref to the iframe element
+  const iframeRef = useRef(null);
+
+    // Use the ref to parse an element in the iframe
+    useEffect(() => {
+      if (iframeRef.current) {
+        const iframeDoc = iframeRef.current.contentWindow.document;
+        const element = iframeDoc.querySelector("#example-element");
+        if (element) {
+          console.log(element.textContent);
+        }
+      }
+    }, [srcDoc]);
+  
 
 
   useEffect(() => {
@@ -36,28 +47,7 @@ const EditorApp = () => {
     return () => clearTimeout(timeout);
   }, [html, css, js]);
 
-    useEffect(() => {
-    const iframe = iframeRef.current;
-    if (iframe) {
-      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-      iframeDoc.addEventListener('mouseover', handleMouseOver);
-      iframeDoc.addEventListener('mouseout', handleMouseOut);
-      return () => {
-        iframeDoc.removeEventListener('mouseover', handleMouseOver);
-        iframeDoc.removeEventListener('mouseout', handleMouseOut);
-      };
-    }
-  }, [iframeRef]); 
-
-  const handleMouseOver = (event) => {
-    const element = event.target;
-    element.style.border = '2px solid blue';
-  };
-
-  const handleMouseOut = (event) => {
-    const element = event.target;
-    element.style.border = 'none';
-  };
+   
 
   return (
     <Container>
@@ -67,21 +57,20 @@ const EditorApp = () => {
            editorTitle="HTML"
            value={html}
            onChange={setHtml}
-           selectedElement={selectedElement}
+  
       />
       <EditorBox 
         language="css"
         editorTitle="CSS"
         value={css}
         onChange={setCss}
-        selectedElement={selectedElement}
       />
       <EditorBox 
          language="javascript"
          editorTitle="JS"
          value={js}
          onChange={setJs}
-         selectedElement={selectedElement}
+
       />
       </Wrapper>
       <BottomWrapper style={{height: widen? "100%" : "50%", position: widen? "absolute" : "relative", marginTop: widen? "-20px" : "0"}}>
@@ -94,6 +83,7 @@ const EditorApp = () => {
           frameBorder="0"
           height="100%"
           width="100%"
+          ref={iframeRef}
         />
         </Cadre>
         </BottomWrapper>
