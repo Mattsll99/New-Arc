@@ -114,3 +114,7 @@ a {
   border-bottom-left-radius: .5rem;
   overflow: hidden;
 }
+
+.selected .CodeMirror {
+  border: 2px solid blue;
+}

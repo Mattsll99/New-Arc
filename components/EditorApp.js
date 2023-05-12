@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from "styled-components"
 import EditorBox from './EditorBox'
 import { useLocalStorage } from './useLocalStorage'
@@ -12,6 +12,10 @@ const EditorApp = () => {
   const [srcDoc, setSrcDoc] = useState("");
 
   const [widen, setWiden] = useState(false)
+
+  const [selectedElement, setSelectedElement] = useState("")
+
+  const iframeRef = useRef(null);
 
   const widenPage = () => {
     setWiden(!widen)
@@ -32,6 +36,29 @@ const EditorApp = () => {
     return () => clearTimeout(timeout);
   }, [html, css, js]);
 
+    useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      iframeDoc.addEventListener('mouseover', handleMouseOver);
+      iframeDoc.addEventListener('mouseout', handleMouseOut);
+      return () => {
+        iframeDoc.removeEventListener('mouseover', handleMouseOver);
+        iframeDoc.removeEventListener('mouseout', handleMouseOut);
+      };
+    }
+  }, [iframeRef]); 
+
+  const handleMouseOver = (event) => {
+    const element = event.target;
+    element.style.border = '2px solid blue';
+  };
+
+  const handleMouseOut = (event) => {
+    const element = event.target;
+    element.style.border = 'none';
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -40,18 +67,21 @@ const EditorApp = () => {
            editorTitle="HTML"
            value={html}
            onChange={setHtml}
+           selectedElement={selectedElement}
       />
       <EditorBox 
         language="css"
         editorTitle="CSS"
         value={css}
         onChange={setCss}
+        selectedElement={selectedElement}
       />
       <EditorBox 
          language="javascript"
          editorTitle="JS"
          value={js}
          onChange={setJs}
+         selectedElement={selectedElement}
       />
       </Wrapper>
       <BottomWrapper style={{height: widen? "100%" : "50%", position: widen? "absolute" : "relative", marginTop: widen? "-20px" : "0"}}>
