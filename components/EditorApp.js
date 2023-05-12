@@ -11,6 +11,12 @@ const EditorApp = () => {
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
 
+  const [widen, setWiden] = useState(false)
+
+  const widenPage = () => {
+    setWiden(!widen)
+  }
+
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -48,6 +54,8 @@ const EditorApp = () => {
          onChange={setJs}
       />
       </Wrapper>
+      <BottomWrapper style={{height: widen? "100%" : "50%", position: widen? "absolute" : "relative", marginTop: widen? "-20px" : "0"}}>
+        <Button onClick={widenPage}></Button>
       <Cadre>
             <iframe
           srcDoc={srcDoc}
@@ -58,6 +66,7 @@ const EditorApp = () => {
           width="100%"
         />
         </Cadre>
+        </BottomWrapper>
     </Container>
   )
 }
@@ -72,9 +81,19 @@ const Container = styled.div`
   flex-direction: column; 
   justify-content: space-between;
   align-items: center;
-  
   padding-top: 20px; 
+  position: relative;
   //padding-bottom: 20px;
+`;
+
+const Button = styled.div`
+  height: 30px; 
+  width: 30px; 
+  position: absolute; 
+  top: 10px; 
+  right: 10px; 
+  background: green;
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`
@@ -86,10 +105,18 @@ const Wrapper = styled.div`
   align-items: center;
   padding-left: 20px; 
   padding-right: 20px;
+  //position: relative;
+`;
+
+
+const BottomWrapper = styled.div`
+  //height: 50%; 
+  width: 100%;
+  position: relative;
 `;
 
 const Cadre = styled.div`
-  height: 50%; 
+  height: 100%; 
   width: 100%; 
   background: transparent; 
   border-top: solid 4px #131313;
