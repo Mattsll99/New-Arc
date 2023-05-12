@@ -17,21 +17,6 @@ const EditorApp = () => {
     setWiden(!widen)
   }
 
-  // Add a ref to the iframe element
-  const iframeRef = useRef(null);
-
-    // Use the ref to parse an element in the iframe
-    useEffect(() => {
-      if (iframeRef.current) {
-        const iframeDoc = iframeRef.current.contentWindow.document;
-        const element = iframeDoc.querySelector("#example-element");
-        if (element) {
-          console.log(element.textContent);
-        }
-      }
-    }, [srcDoc]);
-  
-
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -83,7 +68,6 @@ const EditorApp = () => {
           frameBorder="0"
           height="100%"
           width="100%"
-          ref={iframeRef}
         />
         </Cadre>
         </BottomWrapper>
