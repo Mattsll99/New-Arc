@@ -28,16 +28,6 @@ export default function Home() {
           </LeftMenu>
           <RightMenu>
             <EditorApp />
-            <Cadre>
-            <iframe
-          srcDoc={srcDoc}
-          title="output"
-          sandbox="allow-scripts"
-          frameBorder="0"
-          height="100%"
-          width="100%"
-        />
-            </Cadre>
           </RightMenu>
         </Container>
       </main>
