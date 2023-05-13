@@ -10,12 +10,13 @@ const EditorApp = () => {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
-
   const [widen, setWiden] = useState(false)
+  const [elements, setElements] = useState([])
 
   const widenPage = () => {
     setWiden(!widen)
   }
+
 
 
   useEffect(() => {
@@ -32,6 +33,23 @@ const EditorApp = () => {
     return () => clearTimeout(timeout);
   }, [html, css, js]);
 
+  const handleMouseOver = (event) => {
+    const element = event.target;
+    const { left, top, width, height } = element.getBoundingClientRect();
+    setElements([...elements, { left, top, width, height }]);
+  }
+
+  const renderElements = () => {
+    return elements.map(({ left, top, width, height }, index) => {
+      return (
+        <BlueBorder
+          key={index}
+          style={{ position: 'absolute', left, top, width, height }}
+        />
+      );
+    });
+  }
+
    
 
   return (
@@ -42,6 +60,7 @@ const EditorApp = () => {
            editorTitle="HTML"
            value={html}
            onChange={setHtml}
+           onMouseOver={handleMouseOver}
   
       />
       <EditorBox 
@@ -90,6 +109,11 @@ const Container = styled.div`
   //padding-bottom: 20px;
 `;
 
+const BlueBorder = styled.div`
+  border: 1px solid blue;
+  background: transparent;
+`;
+
 const Button = styled.div`
   height: 30px; 
   width: 30px; 
@@ -130,4 +154,20 @@ const Cadre = styled.div`
   overflow: scroll;
 `;
 
+const Screen = styled.div`
+  position: fixed; 
+  height: 100%; 
+  width: 100%; 
+  background: transparent;
+  z-index: 3;
+  top:0;
+`;
 
+
+//Pas utiliser de Screen
+//Utiliser BottomWrapper comme base pour render les cover
+//Lorsque la souris passe sur un élément qui correspond au code html, trigger l'appartition des borders
+
+
+//Faire apparraitre un div transparent à chaque fois que le code HTML trigger 
+//Y ajouter les borders
