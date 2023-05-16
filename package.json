@@ -20,6 +20,7 @@
     "fs": "^0.0.1-security",
     "google-auth-library": "^8.7.0",
     "googleapis": "^118.0.0",
+    "html2canvas": "^1.4.1",
     "mathjs": "^11.8.0",
     "next": "13.3.0",
     "node-youtube-subtitles": "^1.1.0",

@@ -13,17 +13,49 @@ const EditorApp = () => {
   const [widen, setWiden] = useState(false)
   const [elements, setElements] = useState([])
 
+  
   const widenPage = () => {
     setWiden(!widen)
   }
 
+  function addBordersToHTML(htmlCode) {
+    const styleCode = `<style>
+    * {
+      box-sizing: border-box;
+    }
 
+    /* Add a transparent border to all elements */
+    * {
+      
+    }
 
+    /* Add a border to elements when hovering over them */
+    *:hover {
+      border: 2px solid #67ADDB;
+    }
+    </style>`;
+    
+    const startIndex = htmlCode.indexOf("<head>") +6; 
+    const endIndex = htmlCode.indexOf("</head>");
+
+    if (startIndex === -1 || endIndex === -1) {
+      console.error("Invalid HTML code. Missing <head> or </head> tags.");
+      return htmlCode;
+    }
+
+    const modifiedHTML = htmlCode.slice(0, endIndex) + styleCode + htmlCode.slice(endIndex);
+
+    return modifiedHTML;
+  }
+
+  
+  //Updated html in the useEffect
   useEffect(() => {
     const timeout = setTimeout(() => {
+      const htmlWithBorder = addBordersToHTML(html)
       setSrcDoc(`
         <html lang="en">
-          <body>${html}</body>
+          <body>${htmlWithBorder}</body>
           <style>${css}</style>
           <script>${js}</script>
         </html>
@@ -33,24 +65,6 @@ const EditorApp = () => {
     return () => clearTimeout(timeout);
   }, [html, css, js]);
 
-  const handleMouseOver = (event) => {
-    const element = event.target;
-    const { left, top, width, height } = element.getBoundingClientRect();
-    setElements([...elements, { left, top, width, height }]);
-  }
-
-  const renderElements = () => {
-    return elements.map(({ left, top, width, height }, index) => {
-      return (
-        <BlueBorder
-          key={index}
-          style={{ position: 'absolute', left, top, width, height }}
-        />
-      );
-    });
-  }
-
-   
 
   return (
     <Container>
@@ -60,8 +74,6 @@ const EditorApp = () => {
            editorTitle="HTML"
            value={html}
            onChange={setHtml}
-           onMouseOver={handleMouseOver}
-  
       />
       <EditorBox 
         language="css"
@@ -155,12 +167,13 @@ const Cadre = styled.div`
 `;
 
 const Screen = styled.div`
-  position: fixed; 
-  height: 100%; 
-  width: 100%; 
+  position: absolute;
+  height: 200%; 
+  width: 300px; 
   background: transparent;
   z-index: 3;
   top:0;
+  background: red;
 `;
 
 
