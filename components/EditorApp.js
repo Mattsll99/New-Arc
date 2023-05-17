@@ -130,6 +130,15 @@ const EditorApp = () => {
   
     return modifiedHTML;
   }
+
+  //function getActiveElement(htmlCode) {
+    //const parser = new DOMParser();
+    //const doc = parser.parseFromString(htmlCode, "text/html");
+    //const activeElement = doc.querySelector(".active");
+    
+    //return activeElement;
+  //}
+
   
   useEffect(() => {
     const timeout = setTimeout(() => {

@@ -118,3 +118,7 @@ a {
 .selected .CodeMirror {
   border: 2px solid blue;
 }
+
+.placeholder {
+  color: #FFFFFF
+}

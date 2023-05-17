@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Logo from "../../components/Logo";
 import EditorApp from "../../components/EditorApp";
 import { useState } from "react";
+import TextInput from "../../components/TextInput";
+import ImageInput from "../../components/ImageInput";
 
 
 
@@ -22,9 +24,7 @@ export default function Home() {
         <Container>
           <LeftMenu>
             <Logo />
-            <Wrapper>
-              <Input />
-            </Wrapper>
+            <ImageInput />
           </LeftMenu>
           <RightMenu>
             <EditorApp />
