@@ -19,37 +19,6 @@ const EditorApp = () => {
     setWiden(!widen)
   }
 
-  function addBordersToHTML(htmlCode) {
-    const styleCode = `<style>
-    * {
-      box-sizing: border-box;
-    }
-
-    /* Add a transparent border to all elements */
-    * {
-      
-    }
-
-    /* Add a border to elements when hovering over them */
-    *:hover {
-      border: 2px solid #67ADDB;
-    }
-    </style>`;
-    
-    const startIndex = htmlCode.indexOf("<head>") +6; 
-    const endIndex = htmlCode.indexOf("</head>");
-
-    if (startIndex === -1 || endIndex === -1) {
-      console.error("Invalid HTML code. Missing <head> or </head> tags.");
-      return htmlCode;
-    }
-
-    const modifiedHTML = htmlCode.slice(0, endIndex) + styleCode + htmlCode.slice(endIndex);
-
-    return modifiedHTML;
-  }
-
-
   function addBorderAndConsoleLogging(htmlCode) {
     const styleCode = `<style>
       * {
@@ -76,18 +45,21 @@ const EditorApp = () => {
   
     for (var i = 0; i < divElements.length; i++) {
       divElements[i].addEventListener('click', function(event) {
+        event.target.style.border = '2px solid red';
         console.log("Clicked on div with class:", event.target.className);
       });
     }
   
     for (var i = 0; i < imgElements.length; i++) {
       imgElements[i].addEventListener('click', function(event) {
+        event.target.style.border = '2px solid red';
         console.log("Clicked on image with source:", event.target.src);
       });
     }
   
     for (var i = 0; i < textElements.length; i++) {
       textElements[i].addEventListener('click', function(event) {
+        event.target.style.border = '2px solid red';
         console.log("Clicked on text:", event.target.innerText);
       });
     }
@@ -104,13 +76,68 @@ const EditorApp = () => {
   
     return modifiedHTML;
   }
+
+  function addBordersToHTML(htmlCode) {
+    const styleCode = `<style>
+      * {
+        box-sizing: border-box;
+      }
+  
+      /* Add a transparent border to all elements */
+      * {
+  
+      }
+  
+      /* Add a border to elements when hovering over them */
+      *:hover {
+        border: 2px solid #67ADDB;
+      }
+  
+      /* Add class "active" to the clicked element */
+      .active {
+        border: 2px solid #FFFFFF;
+      }
+    </style>`;
+  
+    const scriptCode = `<script>
+      // Add event listeners to all elements
+      const elements = document.querySelectorAll('*');
+      let lastClickedElement = null; // Store the last clicked element
+  
+      elements.forEach((element) => {
+        element.addEventListener('click', (event) => {
+          if (lastClickedElement) {
+            lastClickedElement.classList.remove('active'); // Remove "active" class from the last clicked element
+            lastClickedElement.style.border = 'none'; // Remove the white border from the last clicked element
+          }
+  
+          lastClickedElement = event.target; // Assign the clicked element to lastClickedElement
+          lastClickedElement.classList.add('active'); // Add "active" class to the clicked element
+          lastClickedElement.style.border = '5px solid #FFFFFF'; // Add the white border to the clicked element
+        });
+      });
+    </script>`;
+  
+    const startIndex = htmlCode.indexOf("<head>") + 6;
+    const endIndex = htmlCode.indexOf("</head>");
+  
+    if (startIndex === -1 || endIndex === -1) {
+      console.error("Invalid HTML code. Missing <head> or </head> tags.");
+      return htmlCode;
+    }
+  
+    const modifiedHTML = htmlCode.slice(0, endIndex) + styleCode + scriptCode + htmlCode.slice(endIndex);
+  
+    return modifiedHTML;
+  }
   
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const modifiedHtml = addBorderAndConsoleLogging(html)
+      //const modifiedHtml = addBorderAndConsoleLogging(html)
+      const htmlWithBorders = addBordersToHTML(html)
       setSrcDoc(`
         <html lang="en">
-          <body>${modifiedHtml}</body>
+          <body>${htmlWithBorders}</body>
           <style>${css}</style>
           <script>${js}</script>
         </html>
