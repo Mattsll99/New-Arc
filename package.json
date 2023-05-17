@@ -23,6 +23,7 @@
     "html2canvas": "^1.4.1",
     "mathjs": "^11.8.0",
     "next": "13.3.0",
+    "node-html-parser": "^6.1.5",
     "node-youtube-subtitles": "^1.1.0",
     "openai": "^3.2.1",
     "react": "18.2.0",

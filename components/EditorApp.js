@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from "styled-components"
 import EditorBox from './EditorBox'
 import { useLocalStorage } from './useLocalStorage'
+import { parse, serialize } from 'node-html-parser';
 
 
 const EditorApp = () => {
@@ -48,14 +49,68 @@ const EditorApp = () => {
     return modifiedHTML;
   }
 
+
+  function addBorderAndConsoleLogging(htmlCode) {
+    const styleCode = `<style>
+      * {
+        box-sizing: border-box;
+      }
   
-  //Updated html in the useEffect
+      /* Add a transparent border to all elements */
+      * {
+        
+      }
+  
+      /* Add a border to elements when hovering over them */
+      *:hover {
+        border: 2px solid #67ADDB;
+      }
+    </style>`;
+  
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlCode;
+  
+    var divElements = tempDiv.getElementsByTagName('div');
+    var imgElements = tempDiv.getElementsByTagName('img');
+    var textElements = tempDiv.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
+  
+    for (var i = 0; i < divElements.length; i++) {
+      divElements[i].addEventListener('click', function(event) {
+        console.log("Clicked on div with class:", event.target.className);
+      });
+    }
+  
+    for (var i = 0; i < imgElements.length; i++) {
+      imgElements[i].addEventListener('click', function(event) {
+        console.log("Clicked on image with source:", event.target.src);
+      });
+    }
+  
+    for (var i = 0; i < textElements.length; i++) {
+      textElements[i].addEventListener('click', function(event) {
+        console.log("Clicked on text:", event.target.innerText);
+      });
+    }
+  
+    const startIndex = htmlCode.indexOf("<head>") + 6;
+    const endIndex = htmlCode.indexOf("</head>");
+  
+    if (startIndex === -1 || endIndex === -1) {
+      console.error("Invalid HTML code. Missing <head> or </head> tags.");
+      return htmlCode;
+    }
+  
+    const modifiedHTML = htmlCode.slice(0, endIndex) + styleCode + htmlCode.slice(endIndex);
+  
+    return modifiedHTML;
+  }
+  
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const htmlWithBorder = addBordersToHTML(html)
+      const modifiedHtml = addBorderAndConsoleLogging(html)
       setSrcDoc(`
         <html lang="en">
-          <body>${htmlWithBorder}</body>
+          <body>${modifiedHtml}</body>
           <style>${css}</style>
           <script>${js}</script>
         </html>
