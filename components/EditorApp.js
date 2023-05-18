@@ -84,7 +84,9 @@ const iframeWindow = iframe.contentWindow;
 const iframeDocument = iframeWindow.document;
 
 // Use querySelector to select the element with the "active" class
-const activeElement = iframeDocument.querySelector('.active');
+const activeElement = iframeDocument.querySelector('.active') !== undefined ? iframeDocument.querySelector('.active') : null;
+
+console.log(activeElement);
 
  
   useEffect(() => {
