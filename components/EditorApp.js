@@ -13,68 +13,11 @@ const EditorApp = () => {
   const [srcDoc, setSrcDoc] = useState("");
   const [widen, setWiden] = useState(false)
   const [elements, setElements] = useState([])
+  const [lookup, setLookup] = useState("")
 
   
   const widenPage = () => {
     setWiden(!widen)
-  }
-
-  function addBorderAndConsoleLogging(htmlCode) {
-    const styleCode = `<style>
-      * {
-        box-sizing: border-box;
-      }
-  
-      /* Add a transparent border to all elements */
-      * {
-        
-      }
-  
-      /* Add a border to elements when hovering over them */
-      *:hover {
-        border: 2px solid #67ADDB;
-      }
-    </style>`;
-  
-    var tempDiv = document.createElement('div');
-    tempDiv.innerHTML = htmlCode;
-  
-    var divElements = tempDiv.getElementsByTagName('div');
-    var imgElements = tempDiv.getElementsByTagName('img');
-    var textElements = tempDiv.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
-  
-    for (var i = 0; i < divElements.length; i++) {
-      divElements[i].addEventListener('click', function(event) {
-        event.target.style.border = '2px solid red';
-        console.log("Clicked on div with class:", event.target.className);
-      });
-    }
-  
-    for (var i = 0; i < imgElements.length; i++) {
-      imgElements[i].addEventListener('click', function(event) {
-        event.target.style.border = '2px solid red';
-        console.log("Clicked on image with source:", event.target.src);
-      });
-    }
-  
-    for (var i = 0; i < textElements.length; i++) {
-      textElements[i].addEventListener('click', function(event) {
-        event.target.style.border = '2px solid red';
-        console.log("Clicked on text:", event.target.innerText);
-      });
-    }
-  
-    const startIndex = htmlCode.indexOf("<head>") + 6;
-    const endIndex = htmlCode.indexOf("</head>");
-  
-    if (startIndex === -1 || endIndex === -1) {
-      console.error("Invalid HTML code. Missing <head> or </head> tags.");
-      return htmlCode;
-    }
-  
-    const modifiedHTML = htmlCode.slice(0, endIndex) + styleCode + htmlCode.slice(endIndex);
-  
-    return modifiedHTML;
   }
 
   function addBordersToHTML(htmlCode) {
@@ -131,19 +74,24 @@ const EditorApp = () => {
     return modifiedHTML;
   }
 
-  //function getActiveElement(htmlCode) {
-    //const parser = new DOMParser();
-    //const doc = parser.parseFromString(htmlCode, "text/html");
-    //const activeElement = doc.querySelector(".active");
-    
-    //return activeElement;
-  //}
+  // Get the iframe element
+const iframe = document.querySelector('iframe');
 
-  
+// Access the contentWindow of the iframe
+const iframeWindow = iframe.contentWindow;
+
+// Access the document inside the iframe
+const iframeDocument = iframeWindow.document;
+
+// Use querySelector to select the element with the "active" class
+const activeElement = iframeDocument.querySelector('.active');
+
+ 
   useEffect(() => {
     const timeout = setTimeout(() => {
       //const modifiedHtml = addBorderAndConsoleLogging(html)
       const htmlWithBorders = addBordersToHTML(html)
+      //setHtml(htmlWithBorders);
       setSrcDoc(`
         <html lang="en">
           <body>${htmlWithBorders}</body>
@@ -190,6 +138,7 @@ const EditorApp = () => {
           frameBorder="0"
           height="100%"
           width="100%"
+          allow-same-origin='true'
         />
         </Cadre>
         </BottomWrapper>
