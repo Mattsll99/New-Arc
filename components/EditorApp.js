@@ -74,25 +74,12 @@ const EditorApp = () => {
     return modifiedHTML;
   }
 
-  // Get the iframe element
-const iframe = document.querySelector('iframe');
-
-// Access the contentWindow of the iframe
-const iframeWindow = iframe.contentWindow;
-
-// Access the document inside the iframe
-const iframeDocument = iframeWindow.document;
-
-// Use querySelector to select the element with the "active" class
-const activeElement = iframeDocument.querySelector('.active') !== undefined ? iframeDocument.querySelector('.active') : null;
-
-console.log(activeElement);
-
  
   useEffect(() => {
     const timeout = setTimeout(() => {
       //const modifiedHtml = addBorderAndConsoleLogging(html)
       const htmlWithBorders = addBordersToHTML(html)
+      setHtml(htmlWithBorders);
       //setHtml(htmlWithBorders);
       setSrcDoc(`
         <html lang="en">
