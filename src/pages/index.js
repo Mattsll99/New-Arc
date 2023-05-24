@@ -3,8 +3,10 @@ import styled from "styled-components";
 import Logo from "../../components/Logo";
 import EditorApp from "../../components/EditorApp";
 import { useState } from "react";
-import TextInput from "../../components/TextInput";
-import ImageInput from "../../components/ImageInput";
+import Menu from "../../components/Menu";
+import Darkmode from "../../components/Darkmode";
+import DeployButton from "../../components/DeployButton";
+import MuseEditor from "../../components/MuseEditor";
 
 
 
@@ -24,10 +26,12 @@ export default function Home() {
         <Container>
           <LeftMenu>
             <Logo />
-            <ImageInput />
+            <Menu />
+            <Darkmode />
+            <DeployButton />
           </LeftMenu>
           <RightMenu>
-            <EditorApp />
+            <MuseEditor />
           </RightMenu>
         </Container>
       </main>
@@ -42,54 +46,30 @@ const Container = styled.div`
   flex-direction: row;
 `;
 
-const Cadre = styled.div`
-  height: 50%; 
-  width: 100%; 
-  background: transparent; 
-  border-top: solid 4px #131313;
-  border-left: solid 4px #131313;
-  border-right: solid 4px #131313;
-  background: #FFFFFF;
-`;
+
 
 const LeftMenu = styled.div`
   height: 100%; 
-  width: 350px;
-  background: #3C3C3C;
+  width: 250px;
+  background: transparent;
   padding-top: 20px;
   padding-left: 10px;
   padding-right: 10px;
   display: flex; 
   flex-direction: column;
+  position: relative;
+  //align-items: center;
 `;
 
 const RightMenu = styled.div`
   height: 100%; 
-  width: 76%;
+  width: 83%;
   background: transparent;
   display: flex; 
   flex-direction: column;
-`;
-
-const Wrapper = styled.div`
-  margin-top: 100px;
-  width: 100%;
-  min-height: 50px;
   display: flex; 
-  align-items: start; 
-  justify-content: start;
-  border: none; 
-  decoration: none;
-  background: #6F6F6F; 
-  text-decoration: none;
+  justify-content: center; 
+  align-items: center;
   padding: 10px;
-  font-size: 15px;
 `;
 
-const Input = styled.textarea`
-  background: transparent; 
-  decoration: none;
-  border: none;
-  width: 100%;
-  height: auto;
-`;

@@ -74,13 +74,17 @@ const EditorApp = () => {
     return modifiedHTML;
   }
 
+  let htmlWithBorders;
  
   useEffect(() => {
+    const handleElementClick = (event) => {
+      // Access the clicked element using event.target
+      console.log('Clicked element:', event.target);
+    };
+  
     const timeout = setTimeout(() => {
-      //const modifiedHtml = addBorderAndConsoleLogging(html)
-      const htmlWithBorders = addBordersToHTML(html)
-      setHtml(htmlWithBorders);
-      //setHtml(htmlWithBorders);
+      // const modifiedHtml = addBorderAndConsoleLogging(html);
+      const htmlWithBorders = addBordersToHTML(html);
       setSrcDoc(`
         <html lang="en">
           <body>${htmlWithBorders}</body>
@@ -88,9 +92,18 @@ const EditorApp = () => {
           <script>${js}</script>
         </html>
       `);
+  
+      // Attach click event listener to the body element
+      const bodyElement = document.querySelector('body');
+      bodyElement.addEventListener('click', handleElementClick);
     }, 200);
-
-    return () => clearTimeout(timeout);
+  
+    return () => {
+      clearTimeout(timeout);
+      // Clean up event listener when the component is unmounted
+      const bodyElement = document.querySelector('body');
+      bodyElement.removeEventListener('click', handleElementClick);
+    };
   }, [html, css, js]);
 
 
@@ -100,7 +113,7 @@ const EditorApp = () => {
       <EditorBox 
            language="xml"
            editorTitle="HTML"
-           value={html}
+           value={htmlWithBorders}
            onChange={setHtml}
       />
       <EditorBox 

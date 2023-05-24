@@ -49,21 +49,26 @@ const ImageInput = () => {
 export default ImageInput;
 
 const Container = styled.div`
-  margin-top: 150px;
+  //margin-top: 150px;
   height: 150px;
-  width: 100%;
+  width: 300px;
   background: #6F6F6F;
   display: flex;
   color: #A7A7A7;
   font-weight: 400;
   font-size: 16px;
   padding: 10px;
+  border-radius: 5px;
+  
 `;
 
 const Wrapper = styled.div`
   display: flex; 
   flex-direction: column;
   align-items: end;
+  position: fixed; 
+  top: 150px;
+  left: 20px;
 `;
 
 const Button = styled.div`
@@ -75,6 +80,7 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   color: #FFFFFF;
+  border-radius: 5px;
   cursor: pointer; 
   &:hover {
     background: #FFFFFF; 
