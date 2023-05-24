@@ -38,6 +38,8 @@ const EditorBox = (props) => {
           mode: language, 
           theme:"material",
           lineNumbers: true,
+          indentWithTabs: false, // Set to true if you want to use tabs for indentation
+          indentUnit: 2, // Number of spaces for each indentation level
         }}
       />
     </Container>
@@ -73,7 +75,7 @@ const Top = styled.div`
 
 const Title = styled.text`
   font-size: 18px;
-  margin-left: 20px;
+  //margin-left: 20px;
   font-weight: 300;
 `;
 
@@ -82,7 +84,9 @@ const Cover = styled.div`
   height: 80%; 
   display: flex;
   //width: fit-content;
-  width: 100px;
+  width: auto;
+  padding-left: 10px; 
+  padding-right: 10px;
   align-items: center; 
   justify-content: center;
   //padding-left: 5px;

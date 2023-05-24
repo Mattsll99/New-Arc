@@ -57,7 +57,7 @@ const MuseEditor = () => {
       />
       <EditorBox 
          language="javascript"
-         editorTitle="JS"
+         editorTitle="Javascript"
          value={js}
          onChange={setJs}
 
