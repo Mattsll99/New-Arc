@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import EditorBox from './EditorBox'
 import { useLocalStorage } from './useLocalStorage'
@@ -9,6 +9,21 @@ const MuseEditor = () => {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSrcDoc(`
+        <html>
+          <body>${html}</body>
+          <style>${css}</style>
+          <script>${js}</script>
+        </html>
+      `)
+    }, 250)
+
+    return () => clearTimeout(timeout)
+  }, [html, css, js])
+
 
   return (
     <Container>
