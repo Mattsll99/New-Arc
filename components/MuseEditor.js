@@ -13,7 +13,19 @@ const MuseEditor = () => {
   return (
     <Container>
       <TopWrapper>
-        <ScreenWrap></ScreenWrap>
+        <ScreenWrap>
+          <Cadre>
+          <iframe
+          style={{borderRadius:'6px'}}
+          srcDoc={srcDoc}
+          title="output"
+          sandbox="allow-scripts"
+          frameBorder="0"
+          height="100%"
+          width="100%"
+          allow-same-origin='true' />
+          </Cadre>
+        </ScreenWrap>
       </TopWrapper>
       <BottomWrapper>
       <EditorBox 
@@ -73,4 +85,10 @@ const BottomWrapper = styled.div`
   height: 30%;
   justify-content: space-between;
   padding-top: 10px;
+`;
+
+const Cadre = styled.div`
+  height: 100%; 
+  width: 100%;
+  border-radius: 6px;
 `;
