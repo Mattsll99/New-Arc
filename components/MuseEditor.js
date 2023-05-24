@@ -10,19 +10,19 @@ const MuseEditor = () => {
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
 
-  //useEffect(() => {
-    //const timeout = setTimeout(() => {
-      //setSrcDoc(`
-        //<html>
-          //<body>${html}</body>
-          //<style>${css}</style>
-          //<script>${js}</script>
-        //</html>
-      //`)
-    //}, 250)
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSrcDoc(`
+        <html>
+          <body>${html}</body>
+          <style>${css}</style>
+          <script>${js}</script>
+        </html>
+      `)
+    }, 250)
 
-    //return () => clearTimeout(timeout)
-  //}, [html, css, js])
+    return () => clearTimeout(timeout)
+  }, [html, css, js])
 
 
   return (
