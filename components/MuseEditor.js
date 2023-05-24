@@ -70,4 +70,7 @@ const ScreenWrap = styled.div`
 const BottomWrapper = styled.div`
   display: flex; 
   flex-direction: row;
+  height: 30%;
+  justify-content: space-between;
+  padding-top: 10px;
 `;

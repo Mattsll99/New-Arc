@@ -24,7 +24,9 @@ const EditorBox = (props) => {
   return (
     <Container>
       <Top>
+        <Cover>
         <Title>{editorTitle}</Title>
+        </Cover>
       </Top>
       <ControlledEditor 
         onBeforeChange={handleChange}
@@ -46,22 +48,40 @@ export default EditorBox
 
 const Container = styled.div`
   height: 100%;
-  width: 31%;
+  width: 32%;
   background: #101010
   overflow: hidden;
+  border: solid 1px #4D4D4D;
+  border-radius: 5px;
   
 `;
 
 const Top = styled.div`
-  height: 60px; 
+  height: 50px; 
   width: 100%; 
-  background: #373B41;
+  background: transparent;
   display: flex; 
   align-items: center;
+  border-bottom: solid 1px #4D4D4D;
+  //padding-left: 5px;
 `;
 
 const Title = styled.text`
   font-size: 18px;
   margin-left: 20px;
   font-weight: 300;
+`;
+
+const Cover = styled.div`
+  margin-left: 10px;
+  height: 80%; 
+  display: flex;
+  //width: fit-content;
+  width: 100px;
+  align-items: center; 
+  justify-content: center;
+  //padding-left: 5px;
+  //padding-right: 5px;
+  border-radius: 100px;
+  background: #448FFF;
 `;
