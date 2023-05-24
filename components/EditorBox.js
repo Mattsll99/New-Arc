@@ -53,6 +53,8 @@ const Container = styled.div`
   overflow: hidden;
   border: solid 1px #4D4D4D;
   border-radius: 5px;
+  overflow: scroll;
+  position: relative;
   
 `;
 
@@ -63,6 +65,9 @@ const Top = styled.div`
   display: flex; 
   align-items: center;
   border-bottom: solid 1px #4D4D4D;
+  //position: absolute; 
+  //top: 0;
+  //z-index: 4;
   //padding-left: 5px;
 `;
 
