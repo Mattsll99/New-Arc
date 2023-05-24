@@ -43,7 +43,25 @@ const MuseEditor = () => {
         </ScreenWrap>
       </TopWrapper>
       <BottomWrapper>
-     
+      <EditorBox 
+           language="xml"
+           editorTitle="HTML"
+           value={html}
+           onChange={setHtml}
+      />
+      <EditorBox 
+        language="css"
+        editorTitle="CSS"
+        value={css}
+        onChange={setCss}
+      />
+      <EditorBox 
+         language="javascript"
+         editorTitle="JS"
+         value={js}
+         onChange={setJs}
+
+      />
       </BottomWrapper>
     </Container>
   )
