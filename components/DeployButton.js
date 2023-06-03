@@ -18,7 +18,7 @@ const Container = styled.div`
   right: 0; 
   margin-left: auto; 
   margin-right: auto;
-  margin-top: 320px;
+  margin-top: 370px;
   border-radius: 100px; 
   display: flex; 
   align-items: center; 

@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const Darkmode = () => {
 
-  const [darkModeOn, setDarkModeOn] = useState(false)
+  const [darkModeOn, setDarkModeOn] = useState(true)
+  const [backgroundColor, setBackgroundColor] = useState('#1d1d1d')
 
   const handleDarkMode = () => {
     setDarkModeOn(true)
+    setBackgroundColor("#1d1d1d")
   }
 
   const handleLightMode = () => {
     setDarkModeOn(false)
+    setBackgroundColor("#ffffff")
   }
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--bg-color', backgroundColor);
+  }, [backgroundColor]);
 
   return (
     <Container>
@@ -49,9 +56,6 @@ const Left = styled.div`
   align-items: center; 
   justify-content: center;
   cursor: pointer;
-  &:hover {
-    background: #4A4A4A;
-  }
 `;
 
 const Right = styled(Left)`

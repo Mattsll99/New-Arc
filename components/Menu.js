@@ -1,21 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import Profile from './Profile'
 
 const Menu = () => {
+
+  const [profile, setProfile] = useState(false)
+
+  const openProfile = () => {
+    setProfile(true)
+  }
+
+  const closeProfile = () => {
+    setProfile(false)
+  }
+
   return (
     <Container>
+      <a href="http://localhost:3000/DiscoveryPage">
       <Line>
         <Icon src="../assets/discover-icon.png"/>
         <Text>Discover</Text>
       </Line>
+      </a>
+      <a href="http://localhost:3000/MuseEditorPage">
       <Line>
-      <Icon src="../assets/profile-icon.png"/>
-      <Text>Your profile</Text>
+      <Icon src="../assets/idee-ampoule.png"/>
+      <Text>Create</Text>
       </Line>
+      </a>
+          <Line onClick={openProfile}>
+            <Icon src="../assets/profile-icon.png"/>
+            <Text>Your profile</Text>
+          </Line>
+      <a href="http://localhost:3000/PlansPage">
       <Line>
       <Icon src="../assets/plus-icon.png"/>
       <Text>Get credits</Text>
       </Line>
+      </a>
+      {
+        profile === true &&
+        <ProfileCover>
+          <CloseButton onClick={closeProfile}>
+            <Cross src="../assets/fermer.png"/>
+          </CloseButton>
+          <Profile />
+        </ProfileCover>
+      } 
     </Container>
   )
 }
@@ -23,7 +54,7 @@ const Menu = () => {
 export default Menu
 
 const Container = styled.div`
-  height: 260px; 
+  height: 320px; 
   width: 100%; 
   background: transparent;
   display: flex; 
@@ -33,6 +64,7 @@ const Container = styled.div`
   padding-left: 10px; 
   padding-right: 10px;
   border-bottom: solid 1px #4A4A4A;
+  //background: red;
 `;
 
 const Line = styled.div`
@@ -66,4 +98,32 @@ const Text = styled.text`
   margin-left: 10px;
 `;
 
-//747474
+const ProfileCover = styled.div`
+  position: fixed; 
+  height: 100vh; 
+  width: 82%;
+  top: 0;
+  right:0;
+  z-index:5;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  background: rgba( 29, 29, 29, 0.25 );
+  backdrop-filter: blur( 12px );
+-webkit-backdrop-filter: blur( 12px );
+  display: flex; 
+  flex-direction: column;
+`;
+
+const CloseButton = styled.div`
+  height: 40px; 
+  width: 40px; 
+  border-radius: 5px;
+  background: #1D1D1D;
+  cursor: pointer;
+`;
+
+const Cross = styled.img`
+  height: 100%; 
+  width: auto;
+`;

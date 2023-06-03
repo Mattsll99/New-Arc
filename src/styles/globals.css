@@ -88,9 +88,13 @@ body {
   overflow-x: hidden;
 }
 
+:root {
+  --bg-color: #1d1d1d;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: #1D1D1D;
+  background: var(--bg-color);
   font-family: "Roboto Mono", sans-serif;
 }
 
