@@ -13,7 +13,7 @@ const Darkmode = () => {
 
   const handleLightMode = () => {
     setDarkModeOn(false)
-    setBackgroundColor("#ffffff")
+    setBackgroundColor("#FEFDE7")
   }
 
   useEffect(() => {
@@ -21,20 +21,20 @@ const Darkmode = () => {
   }, [backgroundColor]);
 
   return (
-    <Container>
-      <Left darkModeOn={darkModeOn} onClick={handleDarkMode}>
+    <DarkContainer>
+      <DarkLeft darkModeOn={darkModeOn} onClick={handleDarkMode}>
         <Image src="../assets/lune-jaune.png"/>
-      </Left>
-      <Right darkModeOn={darkModeOn} onClick={handleLightMode}>
+      </DarkLeft>
+      <DarkRight darkModeOn={darkModeOn} onClick={handleLightMode}>
       <Image src="../assets/soleil-jaune.png"/>
-      </Right>
-    </Container>
+      </DarkRight>
+    </DarkContainer>
   )
 }
 
 export default Darkmode
 
-const Container = styled.div`
+const DarkContainer = styled.div`
   height: 40px; 
   width: 95%; 
   background: transparent;
@@ -47,7 +47,7 @@ const Container = styled.div`
   flex-direction: row;
 `;
 
-const Left = styled.div`
+const DarkLeft = styled.div`
   height: 100%; 
   width: 50%;
   border-radius: 5px;
@@ -58,7 +58,7 @@ const Left = styled.div`
   cursor: pointer;
 `;
 
-const Right = styled(Left)`
+const DarkRight = styled(DarkLeft)`
   background: ${props => (props.darkModeOn ? 'transparent' : '#4a4a4a')};
 `;
 

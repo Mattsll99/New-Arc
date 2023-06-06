@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import Layout from '../../components/Layout'
 import { useLocalStorage } from '../../components/useLocalStorage'
 import EditorBox from '../../components/EditorBox'
+import { useScreenshot } from 'use-react-screenshot';
 
 const MuseEditorPage = () => {
 
@@ -10,6 +11,10 @@ const MuseEditorPage = () => {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
+
+
+  const cadreRef = useRef(null);
+  const [image, takeScreenshot] = useScreenshot();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -25,14 +30,20 @@ const MuseEditorPage = () => {
     return () => clearTimeout(timeout)
   }, [html, css, js])
 
+  const handleScreenshot = () => {
+    takeScreenshot(cadreRef.current);
+  };
+
 
   
   return (
     <Layout>
+      <Button onClick={handleScreenshot}>Screenshot</Button>
+      {image && <Screenshot src={image} alt="screenshot" />}
       <Container>
       <TopWrapper>
         <ScreenWrap>
-          <Cadre>
+          <Cadre ref={cadreRef}>
           <iframe
           style={{borderRadius:'6px'}}
           srcDoc={srcDoc}
@@ -110,4 +121,24 @@ const Cadre = styled.div`
   height: 100%; 
   width: 100%;
   border-radius: 6px;
+`;
+
+const Button = styled.div`
+  height: 40px; 
+  width: 130px; 
+  background: red; 
+  border-radius: 100px; 
+  position: fixed; 
+  top: 100px; 
+  left: 100px;
+  cursor: pointer;
+`;
+
+const Screenshot = styled.img`
+  position: fixed; 
+  left: 10px;
+  bottom: 150px;
+  width: 240px;
+  height: auto; 
+  border-radius: 10px;
 `;

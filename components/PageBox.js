@@ -18,9 +18,11 @@ export default PageBox
 
 const Container = styled.div`
   height: 220px; 
-  width: 250px; 
+  width: 250px;
+  //width: 22%; 
   background: transparent;
   margin-top: 30px;
+  margin-left: 25px;
   border: solid 1px black;
   //border-radius: 5px;
   overflow: hidden;

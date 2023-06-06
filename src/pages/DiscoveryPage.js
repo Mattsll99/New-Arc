@@ -102,7 +102,9 @@ const Body = styled.div`
   display: flex;
   flex-wrap: wrap;
   //flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  //background: red;
+  //align-items: space-between;
   //align-items: center;
   //padding-top: 60px;
   margin-top: 50px;

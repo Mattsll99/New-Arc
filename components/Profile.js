@@ -6,62 +6,7 @@ import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 
 const Profile = ({session}) => {
 
-  const supabase = useSupabaseClient()
-  const user = useUser()
-  const [loading, setLoading] = useState(true)
-  const [username, setUsername] = useState(null)
-  const [photo, setPhoto] = useState(null)
-
-  useEffect(() => {
-    getProfile()
-  }, [session])
-
-  async function getProfile() {
-    try {
-      setLoading(true)
-
-      let {data, error, status} = await supabase
-      .from('profiles')
-      .select(`username, profile_picture`)
-      .eq('id', user.id)
-      .single()
-
-      if (error && status !== 406) {
-        throw error
-      }
-      if (data) {
-        setUsername(data.username)
-        setPhoto(data.profile_picture)
-      }
-    } catch (error) {
-      alert('Error loading user data!')
-      console.log(error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  async function updateProfile({username, photo}) {
-    try {
-      setLoading(true)
-
-      const updates = {
-        id: user.id,
-        username, 
-        profile_picture, 
-        updated_at: new Date().toISOString()
-      }
-
-      let {error} = await supabase.from('profiles').upsert(updates)
-      if (error) throw error
-      alert('Profile updated!')
-    } catch (error) {
-      alert('Error updating the data!')
-      console.log(error)
-    } finally {
-      setLoading(false)
-    }
-  }
+ 
 
   return (
       <Wrapper>
