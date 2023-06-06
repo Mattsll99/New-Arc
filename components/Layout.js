@@ -4,14 +4,14 @@ import Darkmode from './Darkmode'
 import Logo from './Logo'
 import Menu from './Menu'
 import DeployButton from './DeployButton'
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+//import { Auth } from '@supabase/auth-ui-react'
+//import { ThemeSupa } from '@supabase/auth-ui-shared'
+//import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 
 const Layout = ({children}) => {
 
-  const session = useSession()
-  const supabase = useSupabaseClient()
+  //const session = useSession()
+  //const supabase = useSupabaseClient()
 
   const [darkModeOn, setDarkModeOn] = useState(true)
   const [backgroundColor, setBackgroundColor] = useState('#1d1d1d')

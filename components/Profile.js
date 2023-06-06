@@ -4,9 +4,7 @@ import { useState, useEffect } from 'react'
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 
 
-const Profile = ({session}) => {
-
- 
+const Profile = () => {
 
   return (
       <Wrapper>

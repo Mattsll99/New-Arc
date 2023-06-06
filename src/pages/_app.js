@@ -5,11 +5,11 @@ import { useState } from 'react'
 
 export default function App({ Component, pageProps }) {
 
-  const [supabase] = useState(() => createBrowserSupabaseClient())
+  //const [supabase] = useState(() => createBrowserSupabaseClient())
 
   return (
-    <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
+    
       <Component {...pageProps} />
-    </SessionContextProvider>
+    
   )
 }
