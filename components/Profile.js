@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
+//import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
 
 
 const Profile = () => {
