@@ -60,7 +60,7 @@ const Layout = ({children}) => {
       </DarkRight>
     </DarkContainer>
 
-        <DeployButton />
+        
       </LeftMenu>
       <RightMenu>
         {children}

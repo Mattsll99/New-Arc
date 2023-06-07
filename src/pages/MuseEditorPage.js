@@ -4,6 +4,7 @@ import Layout from '../../components/Layout'
 import { useLocalStorage } from '../../components/useLocalStorage'
 import EditorBox from '../../components/EditorBox'
 import { useScreenshot } from 'use-react-screenshot';
+import html2canvas from 'html2canvas';
 
 const MuseEditorPage = () => {
 
@@ -34,17 +35,35 @@ const MuseEditorPage = () => {
     takeScreenshot(cadreRef.current);
   };
 
+  const handleCaptureScreenshot = () => {
+    html2canvas(document.querySelector('#capture')).then((canvas) => {
+      // Convert the canvas to an image
+      const screenshotDataUrl = canvas.toDataURL();
+      
+      // Create a link and download the image
+      const link = document.createElement('a');
+      link.href = screenshotDataUrl;
+      link.download = 'screenshot.png';
+      link.click();
+    });
+  };
+
+  const deploy = () => {
+    //1. Prendre le screenshot
+    //2. Save le html, css, et js
+    //3. Sauver screen et code 
+  }
 
   
   return (
     <Layout>
-      <Button onClick={handleScreenshot}>Screenshot</Button>
-      {image && <Screenshot src={image} alt="screenshot" />}
+      <Button onClick={handleCaptureScreenshot}>Deploy</Button>
       <Container>
       <TopWrapper>
         <ScreenWrap>
-          <Cadre ref={cadreRef}>
+          <Cadre >
           <iframe
+          id="capture"
           style={{borderRadius:'6px'}}
           srcDoc={srcDoc}
           title="output"
@@ -124,14 +143,24 @@ const Cadre = styled.div`
 `;
 
 const Button = styled.div`
-  height: 40px; 
-  width: 130px; 
-  background: red; 
+  height: 35px; 
+  width: 120px; 
+  background: #448FFF;
+  //position: absolute; 
+  //left: 0; 
+  //right: 0; 
+  //margin-left: auto; 
+  //margin-right: auto;
+  //margin-top: 370px;
   border-radius: 100px; 
-  position: fixed; 
-  top: 100px; 
-  left: 100px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 14px;
   cursor: pointer;
+  position: fixed;
+  margin-top: 30px;
+  left: 64px;
 `;
 
 const Screenshot = styled.img`

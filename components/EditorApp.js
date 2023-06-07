@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from "styled-components"
 import EditorBox from './EditorBox'
 import { useLocalStorage } from './useLocalStorage'
-import { parse, serialize } from 'node-html-parser';
+//import { parse, serialize } from 'node-html-parser';
 
 
 const EditorApp = () => {
