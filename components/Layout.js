@@ -3,6 +3,7 @@ import styled from 'styled-components'
 //import Darkmode from './Darkmode'
 import Logo from './Logo'
 import Menu from './Menu'
+import Profile from './Profile'
 //import DeployButton from './DeployButton'
 //import { Auth } from '@supabase/auth-ui-react'
 //import { ThemeSupa } from '@supabase/auth-ui-shared'
@@ -50,7 +51,7 @@ const Layout = ({children}) => {
       <LeftMenu>
         <Logo />
         <Menu />
-
+        <Profile />
         <DarkContainer>
       <DarkLeft darkModeOn={darkModeOn} onClick={handleDarkMode}>
         <Image src="../assets/lune-jaune.png"/>

@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 import { useLocalStorage } from '../../components/useLocalStorage'
 import EditorBox from '../../components/EditorBox'
 import { useScreenshot } from 'use-react-screenshot';
-//import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 
 const MuseEditorPage = () => {
 

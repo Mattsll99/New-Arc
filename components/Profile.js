@@ -7,51 +7,73 @@ import { useState, useEffect } from 'react'
 const Profile = () => {
 
   return (
-      <Wrapper>
-        <Photo src="../assets/man1.jpg"/>
-        <Name>Mister Quoicoubakah</Name>
-      </Wrapper>
+      <Container>
+        <Wrapper>
+          <ProfilePicture src="../assets/white-profile.png"/>
+          <PlanCover>Free</PlanCover>
+          <Button>Upgrade to Pro</Button>
+        </Wrapper>
+      </Container>
   )
 }
 
 export default Profile
 
 const Container = styled.div`
-  position: fixed; 
-  height: 100vh; 
-  width: 82%;
-  top: 0;
-  right:0;
-  z-index:5;
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  background: rgba( 29, 29, 29, 0.25 );
-  backdrop-filter: blur( 12px );
--webkit-backdrop-filter: blur( 12px );
-
+  height: 120px;
+  width: 95%;
+  border-radius: 7px;
+  background: #4A4A4A;
+  position: absolute;
+  bottom: 60px;
+  padding: 5px;
 `;
 
 const Wrapper = styled.div`
-  height: 200px; 
-  width: 400px;
-  background: #1D1D1D; 
-  border-radius: 10px;
+  position: relative; 
+  height: 100%; 
+  width: 100%;
+  background: transparent;
+`;
+
+const PlanCover = styled.div`
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  border-radius: 5px;
+  padding: 4px;
+  height: 30px;
+  width: 70px;
+  background: #448FFF;
+  font-size: 14px;
   display: flex; 
-  flex-direction: column; 
-  align-items: center;
-  margin-top: 20px;
+  align-items: center; 
+  justify-content: center;
 `;
 
-const Photo = styled.img`
-  height: 90px; 
-  width: auto; 
-  border-radius: 200px;
-  margin-top: 20px;
+const ProfilePicture = styled.img`
+  height: 40px; 
+  width: 40px; 
+  border-radius: 80px;
+  position: absolute; 
+  top: 0; 
+  left: 0;
+  cursor: pointer;
 `;
 
-const Name = styled.text`
-  font-size: 20px;
-  font-weight: 200;
-  margin-top: 20px;
+const Button = styled.div`
+  height: 40px; 
+  width: 100%; 
+  background: transparent;
+  position: absolute; 
+  bottom: 0;
+  border-radius: 5px;
+  border: solid 1px #6B6B6B;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 300;
+  cursor: pointer;
 `;
