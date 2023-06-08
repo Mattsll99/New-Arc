@@ -28,10 +28,7 @@ const Menu = () => {
       <Text>Create</Text>
       </Line>
       </a>
-          <Line onClick={openProfile}>
-            <Icon src="../assets/profile-icon.png"/>
-            <Text>Your profile</Text>
-          </Line>
+          
       <a href="http://localhost:3000/PlansPage">
       <Line>
       <Icon src="../assets/plus-icon.png"/>
@@ -54,7 +51,7 @@ const Menu = () => {
 export default Menu
 
 const Container = styled.div`
-  height: 320px; 
+  height: 260px; 
   width: 100%; 
   background: transparent;
   display: flex; 

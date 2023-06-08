@@ -159,7 +159,7 @@ const Button = styled.div`
   font-size: 14px;
   cursor: pointer;
   position: fixed;
-  margin-top: 30px;
+  margin-top: -100px;
   left: 64px;
 `;
 

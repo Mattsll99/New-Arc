@@ -20,7 +20,7 @@ const Profile = () => {
 export default Profile
 
 const Container = styled.div`
-  height: 120px;
+  height: 100px;
   width: 95%;
   border-radius: 7px;
   background: #4A4A4A;

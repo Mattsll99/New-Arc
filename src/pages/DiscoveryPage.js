@@ -26,18 +26,7 @@ const DiscoveryPage = () => {
         </Wrapper>
       </Top>
       <Body>
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
+        
       </Body>
     </Container>
     </Layout>

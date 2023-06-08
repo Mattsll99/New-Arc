@@ -11,6 +11,7 @@ import { useState } from "react";
 //import Discover from "../../components/Discover";
 //import DiscoverPage from "../../components/DiscoverPage";
 import DiscoveryPage from "./DiscoveryPage";
+import MuseEditorPage from "./MuseEditorPage";
 
 
 
@@ -27,7 +28,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <DiscoveryPage />
+        <MuseEditorPage />
       </main>
     </>
   );
