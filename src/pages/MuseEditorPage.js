@@ -43,8 +43,9 @@ const MuseEditorPage = () => {
       <Container>
       <TopWrapper>
         <ScreenWrap>
-          <Cadre ref={cadreRef}>
+          <Cadre>
           <iframe
+          ref={cadreRef}
           style={{borderRadius:'6px'}}
           srcDoc={srcDoc}
           title="output"
@@ -147,7 +148,7 @@ const Button = styled.div`
 const Screenshot = styled.img`
   position: fixed; 
   left: 10px;
-  bottom: 180px;
+  bottom: 170px;
   width: 240px;
   height: auto; 
   border-radius: 10px;
