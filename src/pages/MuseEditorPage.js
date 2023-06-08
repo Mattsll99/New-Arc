@@ -57,7 +57,7 @@ const MuseEditorPage = () => {
   
   return (
     <Layout>
-      <Button onClick={handleCaptureScreenshot}>Deploy</Button>
+      <Button>Deploy</Button>
       <Container>
       <TopWrapper>
         <ScreenWrap>
