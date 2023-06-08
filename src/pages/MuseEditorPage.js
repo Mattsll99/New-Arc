@@ -35,35 +35,16 @@ const MuseEditorPage = () => {
     takeScreenshot(cadreRef.current);
   };
 
-  const handleCaptureScreenshot = () => {
-    html2canvas(document.querySelector('#capture')).then((canvas) => {
-      // Convert the canvas to an image
-      const screenshotDataUrl = canvas.toDataURL();
-      
-      // Create a link and download the image
-      const link = document.createElement('a');
-      link.href = screenshotDataUrl;
-      link.download = 'screenshot.png';
-      link.click();
-    });
-  };
-
-  const deploy = () => {
-    //1. Prendre le screenshot
-    //2. Save le html, css, et js
-    //3. Sauver screen et code 
-  }
-
   
   return (
     <Layout>
-      <Button>Deploy</Button>
+      <Button onClick={handleScreenshot}>Deploy</Button>
+      {image && <Screenshot src={image} alt="screenshot" />}
       <Container>
       <TopWrapper>
         <ScreenWrap>
-          <Cadre >
+          <Cadre ref={cadreRef}>
           <iframe
-          id="capture"
           style={{borderRadius:'6px'}}
           srcDoc={srcDoc}
           title="output"
@@ -166,7 +147,7 @@ const Button = styled.div`
 const Screenshot = styled.img`
   position: fixed; 
   left: 10px;
-  bottom: 150px;
+  bottom: 180px;
   width: 240px;
   height: auto; 
   border-radius: 10px;
