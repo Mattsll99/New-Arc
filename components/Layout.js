@@ -12,20 +12,20 @@ import { createClient } from '@supabase/supabase-js'
 
 const Layout = ({children}) => {
 
-  const supabase = createClient(
-    'https://noyeajvkhmvlowecmmhl.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5veWVhanZraG12bG93ZWNtbWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODU0NjA3NjAsImV4cCI6MjAwMTAzNjc2MH0.cqIl1AwLVNbU59cEWRcAUX9m75M9q-m_LN9TizS_0Ao'
-  )
+  //const supabase = createClient(
+    //'https://noyeajvkhmvlowecmmhl.supabase.co',
+    //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5veWVhanZraG12bG93ZWNtbWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODU0NjA3NjAsImV4cCI6MjAwMTAzNjc2MH0.cqIl1AwLVNbU59cEWRcAUX9m75M9q-m_LN9TizS_0Ao'
+  //)
 
-  function login() {
-    supabase.auth.onAuthStateChange(async (event) => {
-      if (event == 'SIGNED IN') {$
-      }
-      else {
+  //function login() {
+    //supabase.auth.onAuthStateChange(async (event) => {
+      //if (event == 'SIGNED IN') {$
+      //}
+      //else {
 
-      }
-    })
-  }
+      //}
+    //})
+  //}
 
   const [darkModeOn, setDarkModeOn] = useState(true)
   const [backgroundColor, setBackgroundColor] = useState('#1d1d1d')
