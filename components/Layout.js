@@ -61,7 +61,6 @@ const Layout = ({children}) => {
 
   return (
     <Container darkModeOn={darkModeOn}>
-      
       <LeftMenu>
         <Logo />
         <Menu />
