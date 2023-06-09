@@ -19,7 +19,7 @@ const Layout = ({children}) => {
 
   function login() {
     supabase.auth.onAuthStateChange(async (event) => {
-      if (event !== 'SIGNED OUT') {$
+      if (event == 'SIGNED IN') {$
       }
       else {
 
@@ -61,11 +61,7 @@ const Layout = ({children}) => {
 
   return (
     <Container darkModeOn={darkModeOn}>
-      <Cover>
-      <AuthLayer>
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" providers={['github']}/>
-      </AuthLayer>
-      </Cover>
+      
       <LeftMenu>
         <Logo />
         <Menu />
