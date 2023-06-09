@@ -5,14 +5,27 @@ import Logo from './Logo'
 import Menu from './Menu'
 import Profile from './Profile'
 //import DeployButton from './DeployButton'
-//import { Auth } from '@supabase/auth-ui-react'
-//import { ThemeSupa } from '@supabase/auth-ui-shared'
+import { Auth } from '@supabase/auth-ui-react'
+import { ThemeSupa } from '@supabase/auth-ui-shared'
 //import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import { createClient } from '@supabase/supabase-js'
 
 const Layout = ({children}) => {
 
-  //const session = useSession()
-  //const supabase = useSupabaseClient()
+  const supabase = createClient(
+    'https://noyeajvkhmvlowecmmhl.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5veWVhanZraG12bG93ZWNtbWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODU0NjA3NjAsImV4cCI6MjAwMTAzNjc2MH0.cqIl1AwLVNbU59cEWRcAUX9m75M9q-m_LN9TizS_0Ao'
+  )
+
+  function login() {
+    supabase.auth.onAuthStateChange(async (event) => {
+      if (event !== 'SIGNED OUT') {$
+      }
+      else {
+
+      }
+    })
+  }
 
   const [darkModeOn, setDarkModeOn] = useState(true)
   const [backgroundColor, setBackgroundColor] = useState('#1d1d1d')
@@ -48,6 +61,11 @@ const Layout = ({children}) => {
 
   return (
     <Container darkModeOn={darkModeOn}>
+      <Cover>
+      <AuthLayer>
+        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" providers={['github']}/>
+      </AuthLayer>
+      </Cover>
       <LeftMenu>
         <Logo />
         <Menu />
