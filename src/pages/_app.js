@@ -9,9 +9,6 @@ export default function App({ Component, pageProps }) {
   //const [supabase] = useState(() => createBrowserSupabaseClient())
 
   return (
-    
       <Component {...pageProps} />
-      
-   
   )
 }

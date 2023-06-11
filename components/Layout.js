@@ -12,10 +12,12 @@ import { createClient } from '@supabase/supabase-js'
 
 const Layout = ({children}) => {
 
-  //const supabase = createClient(
-    //'https://noyeajvkhmvlowecmmhl.supabase.co',
-    //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5veWVhanZraG12bG93ZWNtbWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODU0NjA3NjAsImV4cCI6MjAwMTAzNjc2MH0.cqIl1AwLVNbU59cEWRcAUX9m75M9q-m_LN9TizS_0Ao'
-  //)
+  const [displayLogin, setDisplayLogin] = useState(true)
+
+  const supabase = createClient(
+    'https://pkfnxbrdgdesmjgqltcv.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM'
+  )
 
   //function login() {
     //supabase.auth.onAuthStateChange(async (event) => {
@@ -26,6 +28,15 @@ const Layout = ({children}) => {
       //}
     //})
   //}
+
+  supabase.auth.onAuthStateChange(async (event) => {
+    if (event ==="SIGNED_OUT") {
+      setDisplayLogin(true)
+    }
+    else {
+      setDisplayLogin(false)
+    }
+  })
 
   const [darkModeOn, setDarkModeOn] = useState(true)
   const [backgroundColor, setBackgroundColor] = useState('#1d1d1d')
@@ -42,9 +53,11 @@ const Layout = ({children}) => {
     localStorage.setItem("darkMode", "false");
   }
 
-  //useEffect(() => {
-    //document.documentElement.style.setProperty('--bg-color', backgroundColor);
-  //}, [backgroundColor]);
+  //function userLogin() {
+    //if (!supabase.auth.session()) {
+      //setDisplayLogin(true);
+    //}
+  //}
 
   useEffect(() => {
     const storedDarkMode = localStorage.getItem("darkMode");
@@ -61,6 +74,18 @@ const Layout = ({children}) => {
 
   return (
     <Container darkModeOn={darkModeOn}>
+      {displayLogin === true &&
+        <Cover>
+        <AuthLayer>
+          <Auth 
+            supabaseClient={supabase}
+            appearance={{theme: ThemeSupa}}
+            theme='dark'
+            providers={['github']}
+          />
+        </AuthLayer>
+      </Cover>
+      }
       <LeftMenu>
         <Logo />
         <Menu />
@@ -183,12 +208,15 @@ const Image = styled.img`
 `;
 
 
-//{!session ? (
+//{displayLogin === true &&
   //<Cover>
-  //<AuthLayer>
-    //<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
-  //</AuthLayer>
-  //</Cover>
-//) : (
-  //<p>Account page will go here.</p>
-//)}
+    //<AuthLayer>
+      //<Auth 
+        //supabaseClient={supabase}
+        //appearance={{ theme: ThemeSupa }} 
+        //theme="dark"
+        //providers={['github']}
+      ///>
+    //</AuthLayer>
+//</Cover>
+//}

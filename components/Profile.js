@@ -1,15 +1,43 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
-//import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react'
+//import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import { createClient } from '@supabase/supabase-js'
 
 
 const Profile = () => {
 
+  const supabase = createClient(
+    'https://pkfnxbrdgdesmjgqltcv.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM'
+  )
+
+  const [connected, setConnected] = useState(false)
+
+  supabase.auth.onAuthStateChange(async (event) => {
+    if (event ==="SIGNED_OUT") {
+      setConnected(false)
+    }
+    else {
+      setConnected(true)
+    }
+  })
+
+  //useEffect(() => {
+    //setUser(supabaseUser);
+  //}, [supabaseUser]);
+
+  //const connected = user !== null;
+
+  
+  //const [connected, setConnected] = useState(false); // State to track user connection status
+
   return (
       <Container>
         <Wrapper>
-          <ProfilePicture src="../assets/white-profile.png"/>
+          <Pin connected={connected}></Pin>
+          <Status>{connected ? 'Connected' : 'Not Connected'}</Status>
           <PlanCover>Free</PlanCover>
           <Button>Upgrade to Pro</Button>
         </Wrapper>
@@ -27,6 +55,7 @@ const Container = styled.div`
   position: absolute;
   bottom: 60px;
   padding: 5px;
+  //position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -51,14 +80,19 @@ const PlanCover = styled.div`
   justify-content: center;
 `;
 
-const ProfilePicture = styled.img`
-  height: 40px; 
-  width: 40px; 
-  border-radius: 80px;
+const Status = styled.text`
+  margin-left: 20px;
+  font-size: 14px;
+`;
+
+const Pin = styled.div`
+  height: 9px; 
+  width: 9px; 
+  border-radius: 18px;
   position: absolute; 
-  top: 0; 
-  left: 0;
-  cursor: pointer;
+  top: 5px; 
+  left: 5px; 
+  background: ${(props) => (props.connected ? '#40bb14' : '#ff5959')};
 `;
 
 const Button = styled.div`
