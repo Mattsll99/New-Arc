@@ -26,13 +26,12 @@ const DiscoveryPage = () => {
         </Wrapper>
       </Top>
       <Body>
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
-        <PageBox />
+        <PageBox source='https://design-direction-002.webflow.io/'/>
+        <PageBox source='https://www.jungle.vc/'/>
+        <PageBox source='https://www.small.dev/'/>
+        <PageBox source='https://www.petalcard.com/'/>
+        <PageBox source='https://www.immeasurable.com/'/>
+        <PageBox source='https://www.radiantsearch.com/'/>
       </Body>
     </Container>
     </Layout>
@@ -97,7 +96,7 @@ const Body = styled.div`
   display: flex;
   flex-wrap: wrap;
   //flex-direction: row;
-  justify-content: start;
+  justify-content: space-between;
   //background: red;
   //align-items: space-between;
   //align-items: center;

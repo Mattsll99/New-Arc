@@ -24,10 +24,10 @@ const MuseEditorPage = () => {
   const [codeInit, setCodeInit] = useState(false)
   const [session, setSession] = useState(null)
 
-  const supabase = createClient(
-    'https://pkfnxbrdgdesmjgqltcv.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM',
-  )
+  //const supabase = createClient(
+    //'https://pkfnxbrdgdesmjgqltcv.supabase.co',
+    //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM',
+  //)
 
   //function login() {
     //supabase.auth.onAuthStateChange(async (event) => {
@@ -82,22 +82,6 @@ const MuseEditorPage = () => {
     <Layout>
       
       <Button onClick={takeThumbnail}>Deploy</Button>
-      {thumbnail && 
-        <ThumbnailContainer>
-          <ThumbnailWrapper className='thumbWrapper'>
-          <iframe
-          ref={ref}
-          style={{borderRadius:'6px'}}
-          srcDoc={srcDoc}
-          title="output"
-          sandbox="allow-scripts"
-          frameBorder="0"
-          height="100%"
-          width="100%"
-          allow-same-origin='true' />
-          </ThumbnailWrapper>
-        </ThumbnailContainer>
-      }
       <Container>
       <TopWrapper>
         <ScreenWrap>

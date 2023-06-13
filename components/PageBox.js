@@ -1,15 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const PageBox = () => {
+const PageBox = ({source}) => {
   //props avec screen image, name, link
   return (
     <Container>
-      <Screen></Screen>
-      <Bottom>
-        <Profile />
-        <Name>Matthias Sylla</Name>
-      </Bottom>
+      <Screen>
+        <Cover></Cover>
+        <iframe style={{borderRadius:'6px'}} src={source}/>
+      </Screen>
     </Container>
   )
 }
@@ -17,24 +16,43 @@ const PageBox = () => {
 export default PageBox
 
 const Container = styled.div`
-  height: 220px; 
-  width: 250px;
+  //height: 220px; 
+  //width: 250px;
+  height: 16vw; 
+  width: 24vw;
   //width: 22%; 
   background: transparent;
   margin-top: 30px;
   margin-left: 25px;
   border: solid 1px black;
   //border-radius: 5px;
-  overflow: hidden;
+  //overflow: hidden;
   border: none;
+  border-radius: 5px;
+  //background: red;
 `; 
 
+const Cover = styled.div`
+  position: absolute; 
+  height: 100%; 
+  width: 100%; 
+  background: transparent;
+`;
+
 const Screen = styled.div`
-  height: 80%; 
+  height: 100%; 
   width: 100%; 
   background:transparent;
   border-radius: 5px;
-  border: solid 1px #FFFFFF;
+  overflow: hidden;
+  padding: 1px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  overflow-y: hidden;
+  position: relative;
+  //background: blue;
+  //border: solid 1px #FFFFFF;
 `;
 
 const Bottom = styled.div`
