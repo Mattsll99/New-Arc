@@ -12,12 +12,12 @@ import { createClient } from '@supabase/supabase-js'
 
 const Layout = ({children}) => {
 
-  const [displayLogin, setDisplayLogin] = useState(true)
+  //const [displayLogin, setDisplayLogin] = useState(true)
 
-  const supabase = createClient(
-    'https://pkfnxbrdgdesmjgqltcv.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM'
-  )
+  //const supabase = createClient(
+    //'https://pkfnxbrdgdesmjgqltcv.supabase.co',
+    //'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM'
+  //)
 
   //function login() {
     //supabase.auth.onAuthStateChange(async (event) => {
@@ -29,14 +29,14 @@ const Layout = ({children}) => {
     //})
   //}
 
-  supabase.auth.onAuthStateChange(async (event) => {
-    if (event ==="SIGNED_OUT") {
-      setDisplayLogin(true)
-    }
-    else {
-      setDisplayLogin(false)
-    }
-  })
+  //supabase.auth.onAuthStateChange(async (event) => {
+    //if (event ==="SIGNED_OUT") {
+      //setDisplayLogin(true)
+    //}
+    //else {
+      //setDisplayLogin(false)
+    //}
+  //})
 
   const [darkModeOn, setDarkModeOn] = useState(true)
   const [backgroundColor, setBackgroundColor] = useState('#1d1d1d')
@@ -74,18 +74,7 @@ const Layout = ({children}) => {
 
   return (
     <Container darkModeOn={darkModeOn}>
-      {displayLogin === true &&
-        <Cover>
-        <AuthLayer>
-          <Auth 
-            supabaseClient={supabase}
-            appearance={{theme: ThemeSupa}}
-            theme='dark'
-            providers={['github']}
-          />
-        </AuthLayer>
-      </Cover>
-      }
+      
       <LeftMenu>
         <Logo />
         <Menu />
@@ -210,13 +199,13 @@ const Image = styled.img`
 
 //{displayLogin === true &&
   //<Cover>
-    //<AuthLayer>
-      //<Auth 
-        //supabaseClient={supabase}
-        //appearance={{ theme: ThemeSupa }} 
-        //theme="dark"
-        //providers={['github']}
-      ///>
-    //</AuthLayer>
+  //<AuthLayer>
+    //<Auth 
+      //supabaseClient={supabase}
+      //appearance={{theme: ThemeSupa}}
+      //theme='dark'
+      //providers={['github']}
+    ///>
+  //</AuthLayer>
 //</Cover>
 //}

@@ -8,30 +8,11 @@ import { createClient } from '@supabase/supabase-js'
 
 const Profile = () => {
 
-  const supabase = createClient(
-    'https://pkfnxbrdgdesmjgqltcv.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM'
-  )
+  
 
   const [connected, setConnected] = useState(false)
 
-  supabase.auth.onAuthStateChange(async (event) => {
-    if (event ==="SIGNED_OUT") {
-      setConnected(false)
-    }
-    else {
-      setConnected(true)
-    }
-  })
-
-  //useEffect(() => {
-    //setUser(supabaseUser);
-  //}, [supabaseUser]);
-
-  //const connected = user !== null;
-
   
-  //const [connected, setConnected] = useState(false); // State to track user connection status
 
   return (
       <Container>

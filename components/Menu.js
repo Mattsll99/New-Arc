@@ -16,20 +16,20 @@ const Menu = () => {
 
   return (
     <Container>
-      <a href="https://new-arc-five.vercel.app/DiscoveryPage">
+      <a href="http://localhost:3000/DiscoveryPage">
       <Line>
         <Icon src="../assets/discover-icon.png"/>
         <Text>Discover</Text>
       </Line>
       </a>
-      <a href="https://new-arc-five.vercel.app/MuseEditorPage">
+      <a href="http://localhost:3000/MuseEditorPage">
       <Line>
       <Icon src="../assets/idee-ampoule.png"/>
       <Text>Create</Text>
       </Line>
       </a>
           
-      <a href="https://new-arc-five.vercel.app/PlansPage">
+      <a href="http://localhost:3000/PlansPage">
       <Line>
       <Icon src="../assets/plus-icon.png"/>
       <Text>Get credits</Text>

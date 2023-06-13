@@ -26,7 +26,13 @@ const DiscoveryPage = () => {
         </Wrapper>
       </Top>
       <Body>
-        
+        <PageBox />
+        <PageBox />
+        <PageBox />
+        <PageBox />
+        <PageBox />
+        <PageBox />
+        <PageBox />
       </Body>
     </Container>
     </Layout>
@@ -91,7 +97,7 @@ const Body = styled.div`
   display: flex;
   flex-wrap: wrap;
   //flex-direction: row;
-  justify-content: center;
+  justify-content: start;
   //background: red;
   //align-items: space-between;
   //align-items: center;

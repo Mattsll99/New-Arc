@@ -4,7 +4,12 @@ import Layout from '../../components/Layout'
 import { useLocalStorage } from '../../components/useLocalStorage'
 import EditorBox from '../../components/EditorBox'
 //import { useScreenshot } from 'use-react-screenshot';
-//import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
+import { Auth } from '@supabase/auth-ui-react'
+import { ThemeSupa } from '@supabase/auth-ui-shared'
+//import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import { createClient } from '@supabase/supabase-js'
+
 
 const MuseEditorPage = () => {
 
@@ -12,6 +17,36 @@ const MuseEditorPage = () => {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
+  const ref = useRef();
+  const [connected, setConnected] = useState(false)
+  const [displayLogin, setDisplayLogin] = useState(false)
+  const [codeInit, setCodeInit] = useState(false)
+  const [session, setSession] = useState(null)
+
+  const supabase = createClient(
+    'https://pkfnxbrdgdesmjgqltcv.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrZm54YnJkZ2Rlc21qZ3FsdGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYzMTIwOTksImV4cCI6MjAwMTg4ODA5OX0.eS0tpxoOHxwXI_BnzMNVMlD4AAFIU6AGesCbwuYzKTM',
+  )
+
+  //function login() {
+    //supabase.auth.onAuthStateChange(async (event) => {
+      //if (event == 'SIGNED IN') {$
+      //}
+      //else {
+
+      //}
+    //})
+  //}
+
+  //supabase.auth.onAuthStateChange(async (event) => {
+    //if (event ==="SIGNED_OUT") {
+      //setDisplayLogin(true)
+    //}
+    //else {
+      //setDisplayLogin(false)
+    //}
+  //})
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -27,18 +62,48 @@ const MuseEditorPage = () => {
     return () => clearTimeout(timeout)
   }, [html, css, js])
 
+  
+  
+  
 
+  const takeThumbnail = () => {
+    html2canvas(ref.current).then((canvas) => {
+      const dataURL = canvas.toDataURL();
+      setThumbnail(dataURL);
+    });
+  };
+
+  const initializeCode = () => {
+    setCodeInit(true)
+  }
 
   
   return (
     <Layout>
-      <Button>Deploy</Button>
       
+      <Button onClick={takeThumbnail}>Deploy</Button>
+      {thumbnail && 
+        <ThumbnailContainer>
+          <ThumbnailWrapper className='thumbWrapper'>
+          <iframe
+          ref={ref}
+          style={{borderRadius:'6px'}}
+          srcDoc={srcDoc}
+          title="output"
+          sandbox="allow-scripts"
+          frameBorder="0"
+          height="100%"
+          width="100%"
+          allow-same-origin='true' />
+          </ThumbnailWrapper>
+        </ThumbnailContainer>
+      }
       <Container>
       <TopWrapper>
         <ScreenWrap>
           <Cadre>
           <iframe
+          ref={ref}
           style={{borderRadius:'6px'}}
           srcDoc={srcDoc}
           title="output"
@@ -50,20 +115,23 @@ const MuseEditorPage = () => {
           </Cadre>
         </ScreenWrap>
       </TopWrapper>
-      <BottomWrapper>
+      <BottomWrapper onClick={initializeCode}>
       <EditorBox 
+           onClick={initializeCode}
            language="xml"
            editorTitle="HTML"
            value={html}
            onChange={setHtml}
       />
-      <EditorBox 
+      <EditorBox
+        onClick={initializeCode}
         language="css"
         editorTitle="CSS"
         value={css}
         onChange={setCss}
       />
       <EditorBox 
+        onClick={initializeCode}
          language="javascript"
          editorTitle="Javascript"
          value={js}
@@ -86,6 +154,28 @@ const Container = styled.div`
   padding: 10px;
   display: flex; 
   flex-direction: column;
+`;
+
+const ThumbnailContainer = styled.div`
+  height: 150px; 
+  width: 235px;
+  position: absolute; 
+  bottom: 180px; 
+  left: 10px;
+`;
+
+const ThumbnailWrapper = styled.div`
+  height: 100%; 
+  width: 100%; 
+  position: relative;
+`;
+
+const ThumbnailCover = styled.div`
+  height: 100%; 
+  width: 100%; 
+  position: absolute; 
+  z-index: 2; 
+  background: transparent;
 `;
 
 const TopWrapper = styled.div`
@@ -190,3 +280,46 @@ const Icon = styled.img`
   margin-left: auto; 
   margin-right: auto;
 `;
+
+const AuthLayer = styled.div`
+  height: auto; 
+  padding: 10px;
+  border-radius: 10px;
+  width: 400px; 
+  //position: absolute; 
+  background: #1E1E1E;
+  //z-index: 4;
+`;
+
+const Cover = styled.div`
+  height: 100vh; 
+  width: 100vw; 
+  position: fixed; 
+  letf:0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto;
+  z-index: 4; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  background: rgba( 255, 255, 255, 0.25 );
+  //box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 16.5px );
+  -webkit-backdrop-filter: blur( 16.5px );
+  //border-radius: 10px;
+  //border: 1px solid rgba( 255, 255, 255, 0.18 );
+`;
+
+//{displayLogin === true &&
+  //<Cover>
+  //<AuthLayer>
+    //<Auth 
+      //supabaseClient={supabase}
+      //appearance={{theme: ThemeSupa}}
+      //theme='dark'
+      //providers={['github']}
+    ///>
+  //</AuthLayer>
+//</Cover>
+//}
