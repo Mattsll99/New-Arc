@@ -9,7 +9,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 //import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import { SupabaseClient, createClient } from '@supabase/supabase-js'
 import Authform from './Authform';
-import { checkSession } from '@/pages/api/SessionUtils';
+//import { checkSession } from '@/pages/api/SessionUtils';
 
 let languageLoaded = false; 
 if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
