@@ -1,49 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import Profile from './Profile'
 
 const Menu = () => {
-
-  const [profile, setProfile] = useState(false)
-
-  const openProfile = () => {
-    setProfile(true)
-  }
-
-  const closeProfile = () => {
-    setProfile(false)
-  }
-
   return (
     <Container>
-      <a href="https://new-arc-five.vercel.app/DiscoveryPage">
-      <Line>
-        <Icon src="../assets/discover-icon.png"/>
-        <Text>Discover</Text>
-      </Line>
-      </a>
-      <a href="https://new-arc-five.vercel.app/MuseEditorPage">
-      <Line>
-      <Icon src="../assets/idee-ampoule.png"/>
-      <Text>Create</Text>
-      </Line>
-      </a>
-          
-      <a href="https://new-arc-five.vercel.app/PlansPage">
-      <Line>
-      <Icon src="../assets/plus-icon.png"/>
-      <Text>Get credits</Text>
-      </Line>
-      </a>
-      {
-        profile === true &&
-        <ProfileCover>
-          <CloseButton onClick={closeProfile}>
-            <Cross src="../assets/fermer.png"/>
-          </CloseButton>
-          <Profile />
-        </ProfileCover>
-      } 
+      
     </Container>
   )
 }
@@ -51,76 +12,18 @@ const Menu = () => {
 export default Menu
 
 const Container = styled.div`
-  height: 260px; 
-  width: 100%; 
-  background: transparent;
-  display: flex; 
-  flex-direction: column;
-  justify-content: start;
-  padding-top: 80px;
-  padding-left: 10px; 
-  padding-right: 10px;
-  border-bottom: solid 1px #4A4A4A;
-  //background: red;
-`;
-
-const Line = styled.div`
-  height: 40px; 
-  width: 100%;
-  background: transparent;
-  margin-top: 15px;
-  border-radius: 5px;
-  display: flex; 
-  flex-direction: row; 
-  align-items: center; 
-  justify-content: start;
-  padding-left: 5px; 
-  padding-right: 5px;
-  &:hover {
-    background: #505050;
-  }
-  cursor: pointer;
-`;
-
-const Icon = styled.img`
-  height: 20px; 
-  width: 20px; 
-  background: transparent;
-`;
-
-const Text = styled.text`
-  font-size: 14px; 
-  font-weight: 400; 
-  color: #747474;
-  margin-left: 10px;
-`;
-
-const ProfileCover = styled.div`
+  height: 100%;
+  width: 130px; 
   position: fixed; 
-  height: 100vh; 
-  width: 82%;
-  top: 0;
-  right:0;
-  z-index:5;
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  background: rgba( 29, 29, 29, 0.25 );
-  backdrop-filter: blur( 12px );
--webkit-backdrop-filter: blur( 12px );
-  display: flex; 
-  flex-direction: column;
+  top: 0; 
+  left:0;
+  border-right: solid 1px #989898;
+  //z-index: 2;
+  background: #2E2E2E;
 `;
 
-const CloseButton = styled.div`
-  height: 40px; 
-  width: 40px; 
-  border-radius: 5px;
-  background: #1D1D1D;
-  cursor: pointer;
-`;
-
-const Cross = styled.img`
-  height: 100%; 
-  width: auto;
+const Top = styled.div`
+  width: 100%; 
+  height: 60px; 
+  background: #1E1E1E;
 `;

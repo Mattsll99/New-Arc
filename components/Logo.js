@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <Wrapper>
       <Text>
-        <Text style={{ color: "#7E7E7E" }}>Muse</Text>Art
+        <Text style={{ color: "#7E7E7E" }}>Muse</Text>Code
       </Text>
     </Wrapper>
   );
@@ -15,14 +15,17 @@ export default Logo;
 
 
 const Wrapper = styled.div`
-  margin-left: 10px;
-  background: red;
+  //margin-left: 10px;
+  //background: red;
   width: 100px;
   border-radius: 3px;
   display: flex; 
   align-items: center; 
   justify-content: center;
-  background: #1D1D1D;
+  position: absolute; 
+  top: 20px; 
+  left: 20px;
+  //background: #1D1D1D;
 `;
 
 const Text = styled.text`

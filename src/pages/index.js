@@ -3,15 +3,11 @@ import styled from "styled-components";
 //import Logo from "../../components/Logo";
 //import EditorApp from "../../components/EditorApp";
 import { useState } from "react";
-//import Menu from "../../components/Menu";
-//import Darkmode from "../../components/Darkmode";
-//import DeployButton from "../../components/DeployButton";
-//import MuseEditor from "../../components/MuseEditor";
-//import Plans from "../../components/Plans";
-//import Discover from "../../components/Discover";
-//import DiscoverPage from "../../components/DiscoverPage";
-import DiscoveryPage from "./DiscoveryPage";
-import MuseEditorPage from "./MuseEditorPage";
+import HomePage from "./HomePage";
+import MuseCode from "./MuseCode";
+import ForkHome from "./ForkHome";
+
+
 
 
 
@@ -28,7 +24,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <MuseEditorPage />
+        <ForkHome />
       </main>
     </>
   );
