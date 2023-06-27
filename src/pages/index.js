@@ -6,6 +6,9 @@ import { useState } from "react";
 import HomePage from "./HomePage";
 import MuseCode from "./MuseCode";
 import ForkHome from "./ForkHome";
+import Signup from "../../components/Signup";
+import Signin from "../../components/Signin";
+
 
 
 
@@ -24,7 +27,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        
         <ForkHome />
+        
       </main>
     </>
   );

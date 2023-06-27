@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.21.10",
     "@huggingface/inference": "1",
     "@monaco-editor/react": "^4.5.1",
     "@supabase/auth-helpers-nextjs": "^0.7.1",
@@ -39,7 +40,9 @@
     "react-codemirror2": "^7.2.1",
     "react-codemirror2-react-17": "^1.0.0",
     "react-dom": "18.2.0",
+    "react-markdown": "^8.0.7",
     "react-monaco-editor": "^0.52.0",
+    "react-spinners": "^0.13.8",
     "styled-components": "^5.3.9",
     "swr": "^2.1.5",
     "use-react-screenshot": "^3.0.0",

@@ -18,6 +18,9 @@ const Container = styled.div`
   display: flex; 
   flex-direction: row;
   z-index: 3;
+  position: fixed; 
+  top: 0;
+  background: #2E2E2E;
 `;
 
 const LogoBox = styled.div`

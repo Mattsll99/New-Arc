@@ -137,3 +137,7 @@ a {
   right: 0;
   bottom: 0;
 }
+
+::placeholder {
+  color: #A1A1A1;
+}
