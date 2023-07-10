@@ -13,6 +13,7 @@ const Folder = ({padding, name}) => {
 export default Folder
 
 const Container = styled.div`
+  //all: initial;
   height: 30px; 
   width: 100%; 
   //background: red;
@@ -32,6 +33,7 @@ const Container = styled.div`
 const Icon = styled.img`
   height: 20px; 
   width: 20px;
+  margin-left: -10px;
 `; 
 
 const Name = styled.text`

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Header = () => {
   return (
     <Container>
-      <LogoBox>Fork</LogoBox>
+      <LogoBox>Adeni</LogoBox>
     </Container>
   )
 }

@@ -171,3 +171,4 @@ const Top = styled.div`
   width: 100%; 
   background: #3E3E3E;
 `;
+

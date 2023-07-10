@@ -12,6 +12,6 @@ export default function App({ Component, pageProps }) {
   return (
     <ClerkProvider>
       <Component {...pageProps} />
-      </ClerkProvider>
+    </ClerkProvider>
   )
 }

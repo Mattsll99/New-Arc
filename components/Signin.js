@@ -6,9 +6,7 @@ const Signin = () => {
   return (
     <Container>
       
-      <SignIn
-        afterSignInUrl='http://localhost:3000/ForkHome'
-      />
+      <SignIn/>
       
     </Container>
   )

@@ -8,6 +8,8 @@ import MuseCode from "./MuseCode";
 import ForkHome from "./ForkHome";
 import Signup from "../../components/Signup";
 import Signin from "../../components/Signin";
+import AdeniPage from "./AdeniPage";
+import { ClerkProvider } from '@clerk/nextjs'
 
 
 
@@ -28,7 +30,7 @@ export default function Home() {
       </Head>
       <main>
         
-        <ForkHome />
+        <AdeniPage />
         
       </main>
     </>

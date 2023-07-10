@@ -9,6 +9,14 @@ import { BarLoader } from 'react-spinners';
 import { useAuth } from "@clerk/nextjs";
 import Signup from './Signup';
 import Signin from './Signin';
+import DisplayOrgan from './DisplayOrgan';
+import Completion from './Completion';
+//import Organization from './RecursiveTree';
+import RecursiveTree from './RecursiveTree';
+import AIChat from './AIChat';
+
+//import TreeOranization from './TreeOrganization';
+//import TreeOrganization from './TreeOrganization';
 //import Signup  from "./Signup"
 
 const RepoChat = () => {
@@ -23,8 +31,13 @@ const RepoChat = () => {
   const [url, setUrl] = useState(false)
   const [signup, setSignup] = useState(false)
   const [signin, setSignin] = useState(false)
+  const [widen, setWiden] = useState(false)
+  const [repoTree, setRepoTree] = useState(null)
+  const [aiIsOn, setAiIsOn] = useState(false)
 
   const { isLoaded, userId, sessionId, getToken } = useAuth();
+
+  const node = [{'value': 'LICENSE'}, {'value': 'test', 'nodes': [{'value': 'UniswapV2Factory.spec.ts'}, {'value': 'UniswapV2Pair.spec.ts'}, {'value': 'shared', 'nodes': [{'value': 'fixtures.ts'}, {'value': 'utilities.ts'}]}, {'value': 'UniswapV2ERC20.spec.ts'}]}, {'value': 'CITATION.cff'}, {'value': 'contracts', 'nodes': [{'value': 'UniswapV2Factory.sol'}, {'value': 'UniswapV2ERC20.sol'}, {'value': 'test', 'nodes': [{'value': 'ERC20.sol'}]}, {'value': 'libraries', 'nodes': [{'value': 'SafeMath.sol'}, {'value': 'UQ112x112.sol'}, {'value': 'Math.sol'}]}, {'value': 'UniswapV2Pair.sol'}, {'value': 'interfaces', 'nodes': [{'value': 'IERC20.sol'}, {'value': 'IUniswapV2ERC20.sol'}, {'value': 'IUniswapV2Factory.sol'}, {'value': 'IUniswapV2Pair.sol'}, {'value': 'IUniswapV2Callee.sol'}]}]}, {'value': 'README.md'}, {'value': 'yarn.lock'}, {'value': 'package.json'}, {'value': 'tsconfig.json'}]
 
   const loadedCheck = () => {
     if (!isLoaded || !userId) {
@@ -32,108 +45,50 @@ const RepoChat = () => {
     }
   }
 
-  
 
-  const fetchOrganization = async () => {
-    try {
-      const response = await axios.post('http://localhost:8000/get_organization', { url: repoUrl });
-      setOrganization(response.data.organization);
-      console.log(organization)
-    } catch (error) {
-      console.error('Error fetching organization:', error);
-      setOrganization(null);
-    }
-  };
 
-  const fetchStructure = async () => {
-    try {
-      const response = await axios.post('http://localhost:8000/get_organization', {url: repoUrl}); 
-    } catch (error) {
-      console.error("Error fetching the repo structure", error);
-    }
-  }
-
-  //async function handleStructure() {
-    //const structure = fetchStructure()
-    //console.log(structure)
-  //}
-
-  //const handleRepo = () => {
-    //getRepositoryOrganization(repoUrl)
-  //}
-
-  const handleRepoBis = async () => {
-    const fromUrlToRepo = await fetchOrganization()
-    console.log(fromUrlToRepo)
-    setOrganization(fromUrlToRepo)
-    //const organizedFiles = organizeFiles(fromUrlToRepo)
-    //console.log(fromUrlToRepo)
-  }
-
-  const handleRepo = async () => {
-    fetchOrganization(); 
-    //const organized = organizeFiles(organization);
-    //console.log(organized)
-    //setSchema(organized)
-    console.log(organization)
-  }
-
-  function organizeFiles(fileList) {
-  const organization = {};
-
-  if (!Array.isArray(fileList)) {
-    return organization;
-  }
-
-  fileList.forEach((item) => {
-    const pathParts = item.split('/');
-
-    let currentFolder = organization;
-
-    pathParts.forEach((part) => {
-      if (!currentFolder.hasOwnProperty(part)) {
-        currentFolder[part] = {};
-      }
-      currentFolder = currentFolder[part];
-    });
-  });
-
-  setSchema(organization)
-  console.log(organization)
-  return organization;
+const widenCode = () => {
+  setWiden(true)
 }
 
+const shrinkCode = () => {
+  setWiden(false)
+}
 
+const displayAi = () => {
+  setAiIsOn(true)
+}
 
-const handleStructure = () => {
-  // Add code here to clear the text inside WrapInput
-  setWrapInputText('');
+const hideAi = () => {
+  setAiIsOn(false)
+}
+
+const fetchRepositoryStructure = async () => {
+  try {
+    const response = await axios.post('http://127.0.0.1:8000/repository-structure', {
+      url: repoUrl, // Replace with the actual GitHub repository URL
+    });
+    setRepoTree(response.data);
+  } catch (error) {
+    console.error('Failed to fetch repository structure:', error);
+  }
 };
 
-const handlePromptSystem = () => {
-  handleStructure()
-  if (firstCompletion === false) {
-    setFirstCompletion(true)
-  } else setSecondCompletion(true)
-}
-
-const handleUrl = () => {
-  setUrl(true)
+const handleCall = async() => {
+  await fetchRepositoryStructure()
 }
 
 
 
   return (
     <Container>
-      {signup === true &&
-        <Signup />
-      }
+      
       <Left>
         <Top>
           {url === false &&
             <InputCover onClick={loadedCheck}>
           <Input placeholder='Paste the URL to a repository' type="text" value={repoUrl} onChange={(e) => setRepoUrl(e.target.value)}/>
-          <Button onClick={fetchOrganization}>Validate</Button>
+          <Button onClick={handleCall}>Validate</Button>
           </InputCover>
           }
           {url === true &&
@@ -141,26 +96,23 @@ const handleUrl = () => {
           }
         </Top>
         <BodyCover>
+          <Completion />
+          {aiIsOn === true &&
+            <AIChat />
+          }
         </BodyCover>
-        <BottomWrapper>
-        <BottomCover>
-          <LoadingWrapper>
-        <BarLoader
-          color={'#448FFF'} 
-          loading={false} 
-          width={200}
-          height={4}
-        />
-        </LoadingWrapper>
-          <Wrap onClick={loadedCheck}>
-            <WrapInput placeholder='Enter your prompt' value={wrapInputText} onChange={(e) => setWrapInputText(e.target.value)}/>
-            <Ask onClick={handlePromptSystem}>Ask</Ask>
-          </Wrap>
-        </BottomCover>
-        </BottomWrapper>
+        
       </Left>
-      <Right>
-        <Schema />
+      <Right widen={widen}>
+        <SizeIcon src={widen ? "../assets/icon-retrecir.png" : "../assets/icon-élargir.png"} onClick={widen ? shrinkCode : widenCode}/>
+        {
+          repoTree !== null &&
+          <RecursiveTree nodes={repoTree}/>
+        }
+        <AIButton>
+          <LeftButton aiIsOn={aiIsOn} onClick={hideAi}>AI Off</LeftButton>
+          <RightButton aiIsOn={aiIsOn} onClick={displayAi}>AI On</RightButton>
+        </AIButton>
       </Right>
     </Container>
   )
@@ -174,6 +126,53 @@ const Container = styled.div`
   display: flex; 
   flex-direction: row;
   padding-top: 60px;
+  position: relative;
+`;
+
+const AIButton = styled.div`
+  position: absolute; 
+  bottom: 10px; 
+  width: 90%; 
+  height: 40px;
+  //background: red;
+  border-radius: 4px; 
+  border: solid 1px #989898;
+  display: flex; 
+  flex-direction: row;
+  padding: 5px;
+`;
+
+const LeftButton = styled.div`
+  height: 100%; 
+  width: 50%; 
+  border-radius: 3px;
+  //background: #448FFF;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 300;
+  font-size: 16px;
+  cursor: pointer;
+  background: ${props => props.aiIsOn ? 'transparent' : '#448FFF'};
+`;
+
+const RightButton = styled(LeftButton)`
+  background: ${props => props.aiIsOn ? '#448FFF' : 'transparent'};
+`;
+
+const SizeIcon = styled.img`
+  height: 28px; 
+  width: 28px; 
+  position: absolute; 
+  top: 10px; 
+  left: 10px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 3px;
+  &:hover {
+    background: #989898;
+  }
 `;
 
 const Left = styled.div`
@@ -198,6 +197,16 @@ const Right = styled.div`
   align-items: center;
   padding: 10px;
   overflow: scroll;
+  position: relative;
+  //height: ${props => props.widen ? '100%' : 'auto'};
+  width: ${props => props.widen ? '100%' : '23%'};
+  position: ${props => props.widen ? 'absolute' : 'relative'};
+  //position: absolute;
+  //height: 100%; 
+  //width: 100%;
+  //background: red;
+  padding-top: 40px;
+  z-index: 5;
 `;
 
 const Text = styled.text`
@@ -230,7 +239,8 @@ const Top = styled.div`
 const BodyCover = styled.div`
   height: 100%; 
   width: 100%; 
-  //background: red;
+  background: #232323;
+  
 `;
 
 const InputCover = styled.div`
@@ -358,3 +368,6 @@ const Button = styled.div`
 //)}
 
 
+//{signup === true &&
+        //<Signup />
+      //}
