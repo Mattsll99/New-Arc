@@ -4,14 +4,16 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 //import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { useState } from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
+import { SessionProvider } from 'next-auth/react'
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: {session, ...pageProps} }) {
 
   //const [supabase] = useState(() => createBrowserSupabaseClient())
 
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+    <UserProvider>
       <Component {...pageProps} />
-    </ClerkProvider>
+      </UserProvider>
   )
 }

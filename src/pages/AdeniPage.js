@@ -5,12 +5,26 @@ import axios from 'axios';
 import Signup from '../../components/Signup';
 import Signin from '../../components/Signin';
 import { MendableSearchBar } from "@mendable/search"
-import { useAuth } from "@clerk/nextjs";
+//import { useAuth } from "@clerk/nextjs";
+//import { useUser } from '@clerk/nextjs';
+import Project from '../../components/Project';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { useRouter } from 'next/router';
+
 
 
 const AdeniPage = () => {
+  const { user, error, isLoading } = useUser();
+  console.log(user)
 
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const router = useRouter();
+
+  //const { isLoaded, userId, sessionId, getToken } = useAuth();
+  //const user = useUser()
+  //console.log(user)
+  //console.log(isLoaded)
+  //console.log(user.user.emailAddresses[0].emailAddress)
+  //console.log(userId)
 
   const [repoUrl, setRepoUrl] = useState("")
   const [code, setCode] = useState('')
@@ -21,6 +35,12 @@ const AdeniPage = () => {
   const [instance, setInstance] = useState(false)
 
   let content;
+
+  const handleLoginClick = () => {
+    if (!user) {
+      router.push('/api/auth/login');
+    }
+  };
 
   const handleEditorDidMount = (editor) => {
     editor.onMouseDown((event) => {
@@ -75,7 +95,7 @@ const AdeniPage = () => {
     console.log(code)
   }
 
-  console.log(code)
+  //console.log(code)
 
   //I. Function to store a repository: 
     //1. check if the user has an id
@@ -128,35 +148,49 @@ const AdeniPage = () => {
     setInstance(true)
   }
 
-  console.log(userId)
+  //console.log(userId)
   
   return (
     <Container>
-      {
-        instance === true && userId === null &&
-        <Signup />
-      }
+      
       <LeftSection>
         <TopLeft>Adeni</TopLeft>
+        <WrapperLeft>
+          <Project />
+        </WrapperLeft>
         <BottomLeft>
           <BottomWrapper>
             <Plan>Pro</Plan>
-            <Remain><Big>1/3</Big>URL</Remain>
+            <Remain>
+            {user && user.name && (
+             <>
+            {user.name.charAt(0)}
+            {user.name.indexOf(" ") !== -1 && user.name.charAt(user.name.indexOf(" ") + 1)}
+            </>
+            )}
+            </Remain>
           </BottomWrapper>
         </BottomLeft>
+        <a href="/api/auth/logout">
+        <LogoutButton>Logout</LogoutButton>
+        </a>
       </LeftSection>
       <CenterSection>
         <TopCenter>
+          <a href={user ? undefined : '/api/auth/login'} onClick={handleLoginClick}>
           <InputCover>
             <Input  placeholder="Repository URL:" onChange={(e) => setRepoUrl(e.target.value)} onClick={handleInstance}/>
             <InputButton src="../assets/blue-arrow.png" onClick={handleScriptFunction}/>
           </InputCover>
+          </a>
         </TopCenter>
       </CenterSection>
       <RightSection>
+        <a href={user ? undefined : '/api/auth/login'} onClick={handleLoginClick}>
         <TopRight>
           <Editor  color="blue" height="100%" theme='vs-dark' language="python" defaultValue="// Welcome" value={code} onMount={handleEditorDidMount} onChange={(e) => setCode(e.target.value)}/>
         </TopRight>
+        </a>
           <WrapperAI>
           <MendableSearchBar style={style}/>
           </WrapperAI>
@@ -172,6 +206,16 @@ const Container  = styled.div`
   width: 100vw; 
   display: flex; 
   flex-direction: row;
+`;
+
+const LoginButton = styled.div`
+  position: absolute; 
+  z-index: 7; 
+  top: 0; 
+  left: 0; 
+  height: 50px; 
+  width: 150px; 
+  background: blue;
 `;
 
 const WrapperAI = styled.div`
@@ -210,9 +254,21 @@ const TopLeft = styled.div`
   font-weight: 300;
 `; 
 
+const WrapperLeft = styled.div`
+  height: 70%; 
+  width: 100%; 
+  //background: red;
+  padding-top: 50px; 
+  display: flex; 
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+
+`;
+
 const BottomLeft = styled.div`
   position: absolute; 
-  bottom: 10px; 
+  bottom: 50px; 
   height: 70px; 
   width: 90%;
   background: #4A4A4A;
@@ -229,7 +285,26 @@ const BottomWrapper = styled.div`
   width: 100%; 
   position: relative; 
   padding: 8px;
+  //background: green;
 `; 
+
+const LogoutButton = styled.div`
+  height: 30px; 
+  width: 90%; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto;
+  background: #FF6060; 
+  position: absolute; 
+  bottom: 10px;
+  border-radius: 4px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-weight: 300;
+  cursor : pointer;
+`;
 
 const Plan = styled.div`
   position: absolute; 
@@ -242,13 +317,15 @@ const Plan = styled.div`
   font-weight: 300;
   border-radius: 4px;
   cursor: pointer;
+  //background: red;
 `;
 
 const Remain = styled.text`
   color: #ffffff;
   position: absolute; 
   bottom: 0;
-  font-size: 12px;
+  font-size: 25px;
+  font-weight: 300;
 `;
 
 const Big = styled.text`
@@ -355,3 +432,14 @@ const Wrapper = styled.div``;
   //        <Entry>Ask anything about <Cover>{snippet}</Cover> :</Entry>
     //      <Wrapper></Wrapper>
       //  </BottomRight>
+
+
+
+      //{
+        //instance === true && user.isLoaded === false &&
+        //<Signup />
+      //}
+
+//<a href="/api/auth/login">
+  //    <LoginButton>Login</LoginButton>
+    //  </a>
